@@ -37,7 +37,9 @@ export async function updateSession(request: NextRequest) {
 
     if (
         !user &&
-        request.nextUrl.pathname.startsWith('/dashboard')
+        (request.nextUrl.pathname.startsWith('/dashboard') ||
+            request.nextUrl.pathname.startsWith('/sim') ||
+            request.nextUrl.pathname.startsWith('/quiz'))
     ) {
         // no user, potentially respond by redirecting the user to the login page
         const url = request.nextUrl.clone()

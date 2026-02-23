@@ -12,15 +12,24 @@ export const metadata: Metadata = {
   description: 'Simulacro no oficial basado en la normativa pública del Ministerio de Educación',
 }
 
+import { ThemeProvider } from '@/components/ThemeProvider'
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
-      <body className={`${inter.variable} font-sans antialiased text-slate-800 bg-[#f8f9fa]`}>
-        {children}
+    <html lang="es" suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased text-slate-800 dark:text-slate-200 bg-[#f8f9fa] dark:bg-slate-900 transition-colors duration-300`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
