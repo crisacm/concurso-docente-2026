@@ -1,1 +1,16 @@
-// Barrel export for UI components (populated by shadcn)
+export { Button, buttonVariants } from './button'
+export { Badge } from './badge'
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+} from './card'
+export { Input } from './input'
+export { Label } from './label'
+export { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select'
+export { Separator } from './separator'
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs'
