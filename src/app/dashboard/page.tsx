@@ -22,12 +22,14 @@ export default async function DashboardPage() {
   }
 
   const email = user.email || 'correo@no-disponible.com'
+  const name = user.user_metadata?.full_name ?? user.user_metadata?.name ?? null
+  const avatarUrl = user.user_metadata?.avatar_url ?? null
 
   return (
     <div className="relative min-h-screen bg-slate-50 pb-20 transition-colors duration-300 dark:bg-slate-900">
       <div className="pointer-events-none absolute top-[30%] left-[10%] h-[300px] w-[300px] rounded-full bg-blue-400/10 blur-[100px] dark:bg-blue-600/10" />
 
-      <Topbar email={email} />
+      <Topbar email={email} name={name} avatarUrl={avatarUrl} />
 
       <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
         <div className="mb-8 text-center sm:text-left">
