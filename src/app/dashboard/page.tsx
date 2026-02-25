@@ -2,13 +2,14 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Topbar } from '@/components/Topbar'
-import { BarChart, Trophy, FileCheck, Timer, ArrowRightCircle, Sparkles } from 'lucide-react'
+import { BarChart, Trophy, FileCheck, Timer, ArrowRight, Sparkles } from 'lucide-react'
 import { Suspense } from 'react'
 import { DashboardChart } from './DashboardChart'
 import { Button } from '@/components/ui'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
 import { Badge } from '@/components/ui'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui'
+import { Separator } from '@/components/ui/separator'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -32,14 +33,39 @@ export default async function DashboardPage() {
       <Topbar email={email} name={name} avatarUrl={avatarUrl} />
 
       <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
-        <div className="mb-8 text-center sm:text-left">
-          <h1 className="text-[24px] font-bold tracking-tight text-slate-800 dark:text-slate-100">
-            Panel de Rendimiento
-          </h1>
-          <p className="mx-auto mt-1.5 max-w-[500px] text-[13px] text-slate-500 sm:mx-0 dark:text-slate-400">
-            Monitorea tu evolución en las competencias clave y optimiza tu preparación para el
-            examen.
-          </p>
+        {/* Hero card */}
+        <div className="mb-8 flex flex-col gap-6 rounded-2xl overflow-hidden bg-gradient-to-r from-violet-900/75 via-violet-800/55 to-violet-900/0 backdrop-blur-sm border-l border-t border-b border-white/10 dark:border-violet-900/20 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+          {/* Left zone */}
+          <div>
+            <h1 className="font-mono font-light text-[22px] sm:text-[26px] leading-tight text-white/90">
+              Simulador<br />Concurso Docente
+            </h1>
+            <p className="text-[12px] text-white/50 mt-1">
+              Generados con IA basados en casos escolares reales
+            </p>
+          </div>
+
+          {/* Inner card (right zone) */}
+          <div className="flex items-center gap-4 rounded-xl bg-white/75 dark:bg-slate-800/70 backdrop-blur-md border border-slate-200/50 dark:border-white/15 px-4 py-3 shrink-0 sm:max-w-[50%]">
+            <div>
+              <p className="text-[11px] text-slate-600 dark:text-white/70">
+                Información basada en la normativa vigente.
+              </p>
+              <Link
+                href="/regulations"
+                className="text-[11px] text-slate-700 dark:text-white/90 underline underline-offset-2 hover:text-slate-900 dark:hover:text-white"
+              >
+                Más información
+              </Link>
+            </div>
+            <Separator orientation="vertical" className="h-8 bg-slate-300 dark:bg-white/20" />
+            <Link href="/sim">
+              <span className="flex items-center gap-1.5 rounded-full bg-violet-600 dark:bg-violet/20 hover:bg-violet-700 dark:hover:bg-white/30 text-white dark:text-white px-4 py-2 text-[12px] font-medium shadow-sm transition-all cursor-pointer">
+                Iniciar
+                <ArrowRight className="h-3.5 w-3.5" />
+              </span>
+            </Link>
+          </div>
         </div>
 
         <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -211,25 +237,15 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        <div className="flex flex-col items-stretch justify-end gap-4 sm:flex-row sm:items-center">
-          <div className="flex max-w-[fit-content] flex-1 items-center gap-3 self-start rounded-[16px] border border-white/50 bg-white/60 px-4 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md sm:self-center dark:border-slate-700/50 dark:bg-slate-800/60 dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
-            <div className="shrink-0 rounded-full bg-gradient-to-br from-red-400 to-rose-500 p-1.5 text-white shadow-sm">
-              <Sparkles className="h-3.5 w-3.5" />
-            </div>
-            <div className="pr-1">
-              <p className="text-[12px] font-medium text-slate-700 dark:text-slate-200">
-                Refuerza la <span className="font-bold text-red-500 dark:text-red-400">Praxis</span>{' '}
-                para tus próximos intentos.
-              </p>
-            </div>
+        {/* Notificación "Refuerza la Praxis" */}
+        <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500/25 to-emerald-700/25 dark:from-amber-600/25 dark:to-emerald-800/25 backdrop-blur-sm border border-amber-200/30 dark:border-amber-700/20 px-4 py-3 shadow-[0_4px_20px_rgb(0,0,0,0.04)]">
+          <div className="shrink-0 rounded-full bg-amber-100/40 p-1.5 text-amber-600 dark:bg-amber-800/20 dark:text-amber-400">
+            <Sparkles className="h-3.5 w-3.5" />
           </div>
-
-          <Link href="/sim" className="w-full sm:ml-auto sm:w-auto">
-            <Button className="flex w-full items-center justify-center gap-2 rounded-[16px] bg-[#2F65F6] px-7 py-3.5 text-[13px] font-medium text-white shadow-[0_8px_20px_-6px_rgba(47,101,246,0.4)] transition-all hover:bg-blue-600 hover:shadow-[0_12px_24px_-8px_rgba(47,101,246,0.5)] active:scale-[0.98] sm:w-auto dark:bg-blue-600 dark:shadow-[0_8px_20px_-6px_rgba(47,101,246,0.5)] dark:hover:bg-blue-500">
-              Iniciar Nuevo Simulacro
-              <ArrowRightCircle className="h-4 w-4 opacity-80" />
-            </Button>
-          </Link>
+          <p className="text-[12px] font-medium text-slate-700 dark:text-slate-200">
+            Refuerza la <span className="font-bold text-amber-600 dark:text-amber-400">Praxis</span>{' '}
+            para tus próximos intentos.
+          </p>
         </div>
       </main>
     </div>

@@ -1,10 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  weight: ['300', '400'],
 })
 
 export const metadata: Metadata = {
@@ -21,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased text-slate-800 dark:text-slate-200 bg-[#f8f9fa] dark:bg-slate-900 transition-colors duration-300`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased text-slate-800 dark:text-slate-200 bg-[#f8f9fa] dark:bg-slate-900 transition-colors duration-300`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
