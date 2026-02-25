@@ -5,10 +5,8 @@ import { Topbar } from '@/components/Topbar'
 import { BarChart, Trophy, FileCheck, Timer, ArrowRight, Sparkles } from 'lucide-react'
 import { Suspense } from 'react'
 import { DashboardChart } from './DashboardChart'
-import { Button } from '@/components/ui'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
 import { Badge } from '@/components/ui'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui'
 import { Separator } from '@/components/ui/separator'
 
 export default async function DashboardPage() {
@@ -69,114 +67,87 @@ export default async function DashboardPage() {
         </div>
 
         <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <Card className="border-slate-100 bg-white shadow-sm dark:border-slate-700/60 dark:bg-slate-800">
-            <CardContent className="flex flex-col items-start gap-1 p-4">
-              <div className="mb-1 flex items-center gap-1.5 rounded-md bg-blue-50 px-2 py-1 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+          <Card className="py-3 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+            <CardContent className="flex flex-col gap-3 px-4">
+              <div className="flex items-center gap-3 text-blue-600 dark:text-blue-400">
                 <BarChart className="h-3.5 w-3.5" />
-                <p className="text-[9px] font-bold tracking-wider uppercase">Global</p>
+                <p className="text-[9px] font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400">Global</p>
               </div>
-              <div className="mt-1 flex items-baseline gap-1">
-                <span className="text-2xl leading-none font-bold text-slate-800 dark:text-slate-100">
-                  72
-                </span>
-                <span className="text-[11px] font-medium text-slate-400 dark:text-slate-500">
-                  /100
-                </span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-3xl leading-none font-bold text-slate-600 dark:text-slate-100">72</span>
+                <span className="text-[11px] font-medium text-slate-400 dark:text-slate-500">/100</span>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-slate-100 bg-white shadow-sm dark:border-slate-700/60 dark:bg-slate-800">
-            <CardContent className="flex flex-col items-start gap-1 p-4">
-              <div className="mb-1 flex items-center gap-1.5 rounded-md bg-purple-50 px-2 py-1 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
+          <Card className="py-3 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+            <CardContent className="flex flex-col gap-3 px-4">
+              <div className="flex items-center gap-3 text-purple-600 dark:text-purple-400">
                 <FileCheck className="h-3.5 w-3.5" />
-                <p className="text-[9px] font-bold tracking-wider uppercase">Resueltos</p>
+                <p className="text-[9px] font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400">Resueltos</p>
               </div>
-              <span className="mt-1 text-2xl leading-none font-bold text-slate-800 dark:text-slate-100">
-                14
-              </span>
+              <span className="text-3xl leading-none font-bold text-slate-600 dark:text-slate-100">14</span>
             </CardContent>
           </Card>
 
-          <Card className="border-slate-100 bg-white shadow-sm dark:border-slate-700/60 dark:bg-slate-800">
-            <CardContent className="flex flex-col items-start gap-1 p-4">
-              <div className="mb-1 flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-1 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400">
+          <Card className="py-3 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+            <CardContent className="flex flex-col gap-3 px-4">
+              <div className="flex items-center gap-3 text-amber-600 dark:text-amber-400">
                 <Trophy className="h-3.5 w-3.5" />
-                <p className="text-[9px] font-bold tracking-wider uppercase">Récord</p>
+                <p className="text-[9px] font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400">Récord</p>
               </div>
-              <span className="mt-1 text-2xl leading-none font-bold text-slate-800 dark:text-slate-100">
-                88
-              </span>
+              <span className="text-3xl leading-none font-bold text-slate-600 dark:text-slate-100">88</span>
             </CardContent>
           </Card>
 
-          <Card className="border-slate-100 bg-white shadow-sm dark:border-slate-700/60 dark:bg-slate-800">
-            <CardContent className="flex flex-col items-start gap-1 p-4">
-              <div className="mb-1 flex items-center gap-1.5 rounded-md bg-cyan-50 px-2 py-1 text-cyan-600 dark:bg-cyan-500/10 dark:text-cyan-400">
+          <Card className="py-3 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+            <CardContent className="flex flex-col gap-3 px-4">
+              <div className="flex items-center gap-3 text-cyan-600 dark:text-cyan-400">
                 <Timer className="h-3.5 w-3.5" />
-                <p className="text-[9px] font-bold tracking-wider uppercase">Tiempo</p>
+                <p className="text-[9px] font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400">Tiempo</p>
               </div>
-              <span className="mt-1 text-2xl leading-none font-bold text-slate-800 dark:text-slate-100">
-                42m
-              </span>
+              <span className="text-3xl leading-none font-bold text-slate-600 dark:text-slate-100">42m</span>
             </CardContent>
           </Card>
         </div>
 
         <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <Card className="border-slate-100/60 bg-white md:col-span-2 dark:border-slate-700/60 dark:bg-slate-800">
-            <CardHeader className="pb-2">
-              <div className="flex w-full items-center justify-between">
-                <CardTitle className="text-[15px]">Competencias Pedagógicas</CardTitle>
-                <Tabs defaultValue="actual" className="w-auto">
-                  <TabsList className="h-8 bg-slate-100/80 dark:bg-slate-700/50">
-                    <TabsTrigger
-                      value="actual"
-                      className="h-6 px-3 text-[11px] data-[state=active]:bg-white data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-600"
-                    >
-                      Actual
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="historico"
-                      className="h-6 px-3 text-[11px] data-[state=active]:bg-white data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-600"
-                    >
-                      Histórico
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
+          <Card className="pt-0 pb-6 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60 md:col-span-2">
+            <CardHeader className="pb-3 px-4 pt-4">
+              <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Competencias Pedagógicas
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="mt-auto h-[200px] w-full">
-                <Suspense
-                  fallback={
-                    <div className="h-full w-full animate-pulse rounded-lg bg-slate-50 dark:bg-slate-700/50"></div>
-                  }
-                >
-                  <DashboardChart />
-                </Suspense>
-              </div>
+              <Suspense
+                fallback={
+                  <div className="h-[200px] w-full animate-pulse rounded-lg bg-slate-50 dark:bg-slate-700/50" />
+                }
+              >
+                <DashboardChart />
+              </Suspense>
             </CardContent>
           </Card>
 
-          <Card className="border-slate-100/60 bg-white dark:border-slate-700/60 dark:bg-slate-800">
-            <CardHeader className="border-b border-slate-100 pb-3 dark:border-slate-700">
+          <Card className="py-0 border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60 flex flex-col max-h-[240px] md:max-h-none">
+            <CardHeader className="pb-3 px-4 pt-4 border-b border-slate-200/60 dark:border-slate-700/40">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-[14px]">Historial</CardTitle>
-                <Button
-                  variant="ghost"
-                  size="xs"
-                  className="h-auto p-0 text-[10px] font-bold tracking-wider text-blue-600 uppercase hover:text-blue-700 dark:text-blue-400"
+                <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Historial
+                </CardTitle>
+                <Link
+                  href="/record"
+                  className="text-[10px] font-bold tracking-wider uppercase text-blue-600 hover:text-blue-700 dark:text-blue-400"
                 >
                   Ver Todo
-                </Button>
+                </Link>
               </div>
             </CardHeader>
-            <CardContent className="pt-4">
-              <div className="flex flex-col gap-0">
-                <div className="group -mx-2 flex cursor-pointer items-center justify-between rounded-lg border-b border-slate-50 px-2 py-2.5 transition-colors last:border-0 hover:bg-slate-50 dark:border-slate-700/50 dark:hover:bg-slate-700/20">
+            <CardContent className="flex-1 min-h-0 overflow-y-auto px-4 pt-3 pb-4">
+              <div className="flex flex-col gap-1">
+                <div className="group flex cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-white/30 px-1 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10">
                   <div className="flex items-center gap-2.5">
-                    <div className="rounded-md bg-blue-50 p-1.5 text-blue-600 transition-colors group-hover:bg-blue-100 dark:bg-blue-500/10 dark:text-blue-400 dark:group-hover:bg-blue-500/20">
+                    <div className="rounded-md bg-blue-100 p-1.5 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
                       <FileCheck className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex flex-col">
@@ -188,17 +159,14 @@ export default async function DashboardPage() {
                       </span>
                     </div>
                   </div>
-                  <Badge
-                    variant="default"
-                    className="bg-blue-600 text-[14px] font-bold hover:bg-blue-700"
-                  >
+                  <Badge variant="default" className="bg-blue-500 text-[14px] font-bold hover:bg-blue-600">
                     72
                   </Badge>
                 </div>
 
-                <div className="group -mx-2 flex cursor-pointer items-center justify-between rounded-lg border-b border-slate-50 px-2 py-2.5 transition-colors last:border-0 hover:bg-slate-50 dark:border-slate-700/50 dark:hover:bg-slate-700/20">
+                <div className="group flex cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-white/30 px-1 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10">
                   <div className="flex items-center gap-2.5">
-                    <div className="rounded-md bg-emerald-50 p-1.5 text-emerald-600 transition-colors group-hover:bg-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:group-hover:bg-emerald-500/20">
+                    <div className="rounded-md bg-emerald-100 p-1.5 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
                       <FileCheck className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex flex-col">
@@ -208,17 +176,14 @@ export default async function DashboardPage() {
                       <span className="text-[10px] text-slate-400 dark:text-slate-500">19 Feb</span>
                     </div>
                   </div>
-                  <Badge
-                    variant="default"
-                    className="bg-emerald-600 text-[14px] font-bold hover:bg-emerald-700"
-                  >
+                  <Badge variant="default" className="bg-emerald-500 text-[14px] font-bold hover:bg-emerald-600">
                     88
                   </Badge>
                 </div>
 
-                <div className="group -mx-2 flex cursor-pointer items-center justify-between rounded-lg border-b border-slate-50 px-2 py-2.5 opacity-70 transition-colors last:border-0 hover:bg-slate-50 dark:border-slate-700/50 dark:hover:bg-slate-700/20">
+                <div className="group flex cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-white/30 px-1 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10">
                   <div className="flex items-center gap-2.5">
-                    <div className="rounded-md bg-slate-100 p-1.5 text-slate-500 transition-colors group-hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-400 dark:group-hover:bg-slate-600">
+                    <div className="rounded-md bg-slate-100 p-1.5 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
                       <FileCheck className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex flex-col">
