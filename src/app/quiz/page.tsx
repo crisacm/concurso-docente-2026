@@ -1,11 +1,10 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { Topbar } from '@/components/Topbar'
+import { QuizPageClient } from './QuizPageClient'
 
 export default async function QuizPage() {
     const supabase = await createClient()
 
-    // Fetch current user from session
     const {
         data: { user },
     } = await supabase.auth.getUser()
@@ -15,20 +14,14 @@ export default async function QuizPage() {
     }
 
     const email = user.email || 'correo@no-disponible.com'
+    const name = user.user_metadata?.full_name ?? user.user_metadata?.name ?? null
+    const avatarUrl = user.user_metadata?.avatar_url ?? null
 
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-950 relative transition-colors duration-300">
-            <Topbar email={email} />
+        <div className="relative min-h-screen bg-slate-50 pb-20 transition-colors duration-300 dark:bg-slate-900">
+            <div className="pointer-events-none absolute top-[30%] left-[10%] h-[300px] w-[300px] rounded-full bg-blue-400/10 blur-[100px] dark:bg-blue-600/10" />
 
-            <main className="max-w-[800px] mx-auto pt-32 px-4 sm:px-6 flex flex-col items-center text-center">
-                <h1 className="text-[24px] font-bold text-slate-800 dark:text-slate-100">Cargando tu Simulacro...</h1>
-                <p className="text-slate-500 dark:text-slate-400 mt-4 max-w-[400px]">
-                    Estamos preparando las preguntas en base al perfil y a las áreas seleccionadas.
-                </p>
-                <div className="mt-8 flex justify-center">
-                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-                </div>
-            </main>
+            <QuizPageClient email={email} name={name} avatarUrl={avatarUrl} />
         </div>
     )
 }

@@ -13,9 +13,10 @@ interface TopbarProps {
   email: string
   name?: string | null
   avatarUrl?: string | null
+  onHomeClick?: () => void
 }
 
-export function Topbar({ email, name, avatarUrl }: TopbarProps) {
+export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
   const mounted = useMounted()
   const { setTheme, resolvedTheme } = useTheme()
 
@@ -24,10 +25,20 @@ export function Topbar({ email, name, avatarUrl }: TopbarProps) {
 
   return (
     <div className="fixed top-5 right-0 left-0 z-50 mx-auto flex max-w-[800px] items-center justify-between px-6">
-      {/* Zona izquierda: solo ícono */}
-      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
-        <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-      </div>
+      {/* Zona izquierda: logo / home */}
+      {onHomeClick ? (
+        <button
+          onClick={onHomeClick}
+          aria-label="Ir al Dashboard"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md transition-colors hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70"
+        >
+          <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+        </button>
+      ) : (
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+          <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+        </div>
+      )}
 
       {/* Zona central: segmented theme control */}
       <button

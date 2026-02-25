@@ -1,12 +1,10 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { Topbar } from '@/components/Topbar'
-import { SimConfigForm } from './SimConfigForm'
+import { SimPageClient } from './SimPageClient'
 
 export default async function SimPage() {
     const supabase = await createClient()
 
-    // Fetch current user from session
     const {
         data: { user },
     } = await supabase.auth.getUser()
@@ -16,14 +14,14 @@ export default async function SimPage() {
     }
 
     const email = user.email || 'correo@no-disponible.com'
+    const name = user.user_metadata?.full_name ?? user.user_metadata?.name ?? null
+    const avatarUrl = user.user_metadata?.avatar_url ?? null
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 relative pb-20 transition-colors duration-300">
-            <Topbar email={email} />
+        <div className="relative min-h-screen bg-slate-50 pb-20 transition-colors duration-300 dark:bg-slate-900">
+            <div className="pointer-events-none absolute top-[30%] left-[10%] h-[300px] w-[300px] rounded-full bg-blue-400/10 blur-[100px] dark:bg-blue-600/10" />
 
-            <main className="max-w-[700px] mx-auto pt-24 px-4 sm:px-6 flex flex-col items-center">
-                <SimConfigForm />
-            </main>
+            <SimPageClient email={email} name={name} avatarUrl={avatarUrl} />
         </div>
     )
 }
