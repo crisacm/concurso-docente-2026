@@ -2,6 +2,7 @@
 
 - PNPM como gestor de paquetes
 - TypeScript (estricto)
+- Turborepo (task runner del monorepo)
 - Next.js 15
 - React 19
 - TailwindCSS v4 con soporte a dark mode
@@ -15,10 +16,13 @@
 - Axios con interceptores
 - Zod para esquemas de datos
 - React hooks (useState, useEffect, etc.)
+- Astro 5 (Landing Page)
 
 ## Despliegue y CI/CD
 
-- Configurar para desplegar en Vercel
+- Docker multi-stage + NGINX reverse proxy
+- Orquestado con docker-compose
+- platform en /app, landing en /landing
 
 ## Buenas Prácticas
 
@@ -135,90 +139,83 @@ Cada skill puede contener:
 ## Estructura del Proyecto
 
 ```
-concurso-docente-2026/
-├── public/                        # Archivos estáticos
-├── skills/                        # Skills obligatorias del proyecto
-│   ├── nextjs-15/
-│   ├── react-19/
-│   ├── supabase/
-│   ├── tailwindcss-v4/
-│   └── typescript/
-├── src/
-│   ├── app/                       # App Router de Next.js 15
-│   │   ├── favicon.ico
-│   │   ├── globals.css            # Estilos globales (TailwindCSS v4)
-│   │   ├── layout.tsx             # Root layout
-│   │   └── page.tsx               # Página raíz
-│   ├── components/
-│   │   ├── ui/                    # Componentes de UI (Shadcn/Radix)
-│   │   └── shared/                # Componentes reutilizables del proyecto
-│   ├── hooks/                     # Custom React hooks
-│   ├── lib/                       # Utilidades y configuraciones de librerías
-│   ├── services/                  # Capa de servicios (API, Supabase, Axios)
-│   ├── test/
-│   │   └── setup.ts               # Setup global de Vitest + Testing Library
-│   └── types/                     # Tipos e interfaces TypeScript compartidos
-├── .env.local.example             # Template de variables de entorno
-├── .prettierrc                    # Configuración de Prettier
-├── .prettierignore
-├── eslint.config.mjs              # Configuración ESLint (Next.js + TypeScript)
-├── next.config.ts                 # Configuración de Next.js
-├── tsconfig.json                  # TypeScript estricto
-└── vitest.config.ts               # Configuración de Vitest (coverage ≥ 80%)
+concurso-docente-2026/          ← raíz del monorepo
+├── apps/
+│   ├── platform/               ← Next.js 16 (@repo/platform)
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── lib/
+│   │   │   ├── services/
+│   │   │   ├── test/
+│   │   │   └── types/
+│   │   ├── public/
+│   │   ├── package.json
+│   │   ├── tsconfig.json       (extends @repo/config-ts/base)
+│   │   ├── next.config.ts
+│   │   ├── components.json
+│   │   ├── postcss.config.mjs
+│   │   ├── vitest.config.ts
+│   │   ├── eslint.config.mjs
+│   │   ├── .env.local.example
+│   │   └── Dockerfile
+│   └── landing/                ← Astro 5 (@repo/landing)
+│       ├── src/
+│       ├── public/
+│       ├── package.json
+│       ├── tsconfig.json
+│       ├── astro.config.ts
+│       └── Dockerfile
+├── packages/
+│   └── config-ts/              ← TS base compartido (@repo/config-ts)
+│       ├── package.json
+│       └── tsconfig.base.json
+├── nginx/
+│   └── nginx.conf
+├── docker-compose.yml
+├── turbo.json
+├── package.json                ← raíz (solo turbo + prettier)
+├── pnpm-workspace.yaml
+├── .prettierrc
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+└── skills/
 ```
 
 ---
 
 ## Comandos
 
-### Desarrollo
-
 ```bash
-# Iniciar servidor de desarrollo con Turbopack
-pnpm dev
+# Desarrollo (ambas apps en paralelo)
+pnpm dev        # platform :3000, landing :4321
 
-# Compilar para producción
+# App individual
+pnpm --filter @repo/platform dev
+pnpm --filter @repo/landing dev
+
+# Build
 pnpm build
 
-# Iniciar servidor de producción (requiere build previo)
-pnpm start
-```
-
-### Calidad de Código
-
-```bash
-# Análisis estático con ESLint
+# Calidad
 pnpm lint
-
-# Verificar tipos con TypeScript
 pnpm typecheck
-
-# Formatear código con Prettier
 pnpm format
-
-# Verificar formato sin modificar archivos
 pnpm format:check
-```
 
-### Testing
-
-```bash
-# Ejecutar tests en modo watch
-pnpm test
-
-# Ejecutar tests con UI interactiva
-pnpm test:ui
-
-# Ejecutar tests con reporte de cobertura (mínimo 80%)
-pnpm test:coverage
+# Tests (desde apps/platform)
+pnpm --filter @repo/platform test
+pnpm --filter @repo/platform test:coverage
 ```
 
 ### Variables de Entorno
 
-Copiar `.env.local.example` a `.env.local` y completar con las credenciales de Supabase:
+Copiar `apps/platform/.env.local.example` a `apps/platform/.env.local` y completar con las credenciales de Supabase:
 
 ```bash
-cp .env.local.example .env.local
+cp apps/platform/.env.local.example apps/platform/.env.local
 ```
 
 ```env

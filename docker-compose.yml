@@ -1,0 +1,29 @@
+services:
+  platform:
+    build:
+      context: .
+      dockerfile: apps/platform/Dockerfile
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_BASE_PATH=/app
+    env_file:
+      - apps/platform/.env.local
+
+  landing-svc:
+    build:
+      context: .
+      dockerfile: apps/landing/Dockerfile
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - platform
+      - landing-svc
