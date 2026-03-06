@@ -49,7 +49,7 @@ export function QuizPageClient(_props: QuizPageClientProps) {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(interval)
-          router.push('/result')
+          router.push('/sim/result')
           return 0
         }
         return prev - 1
@@ -127,7 +127,7 @@ export function QuizPageClient(_props: QuizPageClientProps) {
             <Button variant="outline" onClick={() => setShowCancelDialog(false)}>
               Continuar
             </Button>
-            <Button variant="destructive" onClick={() => router.push('/result')}>
+            <Button variant="destructive" onClick={() => router.push('/sim/result')}>
               Cancelar Simulacro
             </Button>
           </DialogFooter>
@@ -150,7 +150,7 @@ export function QuizPageClient(_props: QuizPageClientProps) {
             <Button variant="outline" onClick={() => setShowFinalizeDialog(false)}>
               Seguir revisando
             </Button>
-            <Button onClick={() => router.push('/result')}>Finalizar y ver resultados</Button>
+            <Button onClick={() => router.push('/sim/result')}>Finalizar y ver resultados</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

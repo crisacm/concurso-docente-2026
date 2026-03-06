@@ -1,10 +1,21 @@
 'use client'
 
-import { useSyncExternalStore } from 'react'
+import { useState, useRef, useEffect, useSyncExternalStore } from 'react'
 import { User, LogOut, GraduationCap, Sun, Moon } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui'
 import { Separator } from '@/components/ui'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui'
+import { cn } from '@/lib/utils'
+import { signOut } from '@/app/auth/signout/actions'
 
 const subscribe = () => () => {}
 const useMounted = () => useSyncExternalStore(subscribe, () => true, () => false)
@@ -19,26 +30,39 @@ interface TopbarProps {
 export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
   const mounted = useMounted()
   const { setTheme, resolvedTheme } = useTheme()
+  const router = useRouter()
+  const [showSignoutDialog, setShowSignoutDialog] = useState(false)
+  const [pillExpanded, setPillExpanded] = useState(false)
+  const pillRef = useRef<HTMLDivElement>(null)
 
   const isDark = mounted && resolvedTheme === 'dark'
   const displayName = name ?? email.split('@')[0]
 
+  useEffect(() => {
+    if (!pillExpanded) return
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (pillRef.current && !pillRef.current.contains(e.target as Node)) {
+        setPillExpanded(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
+  }, [pillExpanded])
+
   return (
     <div className="fixed top-5 right-0 left-0 z-50 mx-auto flex max-w-[800px] items-center justify-between px-6">
       {/* Zona izquierda: logo / home */}
-      {onHomeClick ? (
-        <button
-          onClick={onHomeClick}
-          aria-label="Ir al Dashboard"
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md transition-colors hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70"
-        >
-          <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-        </button>
-      ) : (
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
-          <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-        </div>
-      )}
+      <button
+        onClick={onHomeClick ?? (() => router.push('/dash'))}
+        aria-label="Ir al Dashboard"
+        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md transition-colors hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70"
+      >
+        <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+      </button>
 
       {/* Zona central: segmented theme control */}
       <button
@@ -62,41 +86,86 @@ export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
       </button>
 
       {/* Zona derecha: pill de usuario */}
-      <div className="flex items-center gap-3 rounded-full border border-white/40 bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
-        {/* Avatar */}
-        {avatarUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={avatarUrl} alt={displayName} className="h-8 w-8 rounded-full object-cover" />
-        ) : (
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-slate-700 dark:text-blue-400">
-            <User className="h-4 w-4" />
+      <div ref={pillRef} className="relative">
+        {/* Trigger móvil: solo avatar, visible únicamente en < sm */}
+        <button
+          onClick={() => setPillExpanded(true)}
+          className="sm:hidden flex h-[40px] w-[40px] items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60"
+          aria-label="Ver opciones de usuario"
+        >
+          {avatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={avatarUrl} alt={displayName} className="h-8 w-8 rounded-full object-cover" />
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-slate-700 dark:text-blue-400">
+              <User className="h-4 w-4" />
+            </div>
+          )}
+        </button>
+
+        {/* Pill completo: siempre visible en sm+, en móvil solo cuando pillExpanded */}
+        <div
+          className={cn(
+            'items-center gap-3 rounded-full border border-white/40 bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60',
+            pillExpanded
+              ? 'absolute right-0 top-0 z-20 flex sm:relative sm:top-auto sm:right-auto sm:z-auto'
+              : 'hidden sm:flex'
+          )}
+        >
+          {/* Avatar */}
+          {avatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={avatarUrl} alt={displayName} className="h-8 w-8 rounded-full object-cover" />
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-slate-700 dark:text-blue-400">
+              <User className="h-4 w-4" />
+            </div>
+          )}
+
+          {/* Nombre + email */}
+          <div className="flex flex-col">
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200">
+              {displayName}
+            </span>
+            <span className="max-w-[120px] truncate text-[10px] text-slate-400 dark:text-slate-500">
+              {email}
+            </span>
           </div>
-        )}
 
-        {/* Nombre + email */}
-        <div className="flex flex-col">
-          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200">
-            {displayName}
-          </span>
-          <span className="max-w-[120px] truncate text-[10px] text-slate-400 dark:text-slate-500">
-            {email}
-          </span>
-        </div>
+          <Separator orientation="vertical" className="mx-1 h-4" />
 
-        <Separator orientation="vertical" className="mx-1 h-4" />
-
-        {/* Logout */}
-        <form action="/auth/signout" method="post">
+          {/* Logout */}
           <Button
             variant="ghost"
             size="icon-xs"
             className="text-slate-400 transition-colors hover:text-slate-600 dark:hover:text-slate-200"
             title="Salir"
+            onClick={() => setShowSignoutDialog(true)}
           >
             <LogOut className="h-3.5 w-3.5" />
           </Button>
-        </form>
+        </div>
       </div>
+
+      {/* Dialog de confirmación de signout */}
+      <Dialog open={showSignoutDialog} onOpenChange={setShowSignoutDialog}>
+        <DialogContent showCloseButton={false} className="rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>¿Cerrar sesión?</DialogTitle>
+            <DialogDescription>
+              Tu sesión será terminada y serás redirigido al inicio.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowSignoutDialog(false)}>
+              Cancelar
+            </Button>
+            <Button variant="destructive" onClick={() => signOut()}>
+              Cerrar sesión
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/auth/signin')
   }
 
   const email = user.email || 'correo@no-disponible.com'
@@ -57,7 +57,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <Separator orientation="vertical" className="h-8 bg-slate-300 dark:bg-white/20" />
-            <Link href="/sim">
+            <Link href="/sim/setup">
               <span className="flex items-center gap-1.5 rounded-full bg-violet-600 dark:bg-violet/20 hover:bg-violet-700 dark:hover:bg-white/30 text-white dark:text-white px-4 py-2 text-[12px] font-medium shadow-sm transition-all cursor-pointer">
                 Iniciar
                 <ArrowRight className="h-3.5 w-3.5" />

@@ -11,13 +11,13 @@ export async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: `${origin}/auth/callback?next=/dashboard`,
+            redirectTo: `${origin}/auth/callback?next=/dash`,
         },
     })
 
     if (error) {
         console.error('Error signing in with Google:', error.message)
-        return redirect('/login?message=Could not authenticate user')
+        return redirect('/auth/signin?message=Could not authenticate user')
     }
 
     if (data.url) {

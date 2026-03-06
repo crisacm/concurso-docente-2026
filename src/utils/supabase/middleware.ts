@@ -37,23 +37,25 @@ export async function updateSession(request: NextRequest) {
 
     if (
         !user &&
-        (request.nextUrl.pathname.startsWith('/dashboard') ||
-            request.nextUrl.pathname.startsWith('/sim') ||
-            request.nextUrl.pathname.startsWith('/quiz'))
+        (request.nextUrl.pathname.startsWith('/dash') ||
+            request.nextUrl.pathname.startsWith('/sim/setup') ||
+            request.nextUrl.pathname.startsWith('/sim/exam') ||
+            request.nextUrl.pathname.startsWith('/sim/result') ||
+            request.nextUrl.pathname.startsWith('/record'))
     ) {
         // no user, potentially respond by redirecting the user to the login page
         const url = request.nextUrl.clone()
-        url.pathname = '/login'
+        url.pathname = '/auth/signin'
         return NextResponse.redirect(url)
     }
 
-    // Redirect authenticated users trying to access login or home to dashboard
+    // Redirect authenticated users trying to access signin to dashboard
     if (
         user &&
-        (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname === '/')
+        request.nextUrl.pathname.startsWith('/auth/signin')
     ) {
         const url = request.nextUrl.clone()
-        url.pathname = '/dashboard'
+        url.pathname = '/dash'
         return NextResponse.redirect(url)
     }
 

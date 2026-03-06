@@ -22,6 +22,13 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui'
 
 type ProfileType = 'aula' | 'orientador' | 'directivo'
 
@@ -52,10 +59,22 @@ const areas = [
     },
 ]
 
+const knowledgeAreas = [
+    { id: 'matematicas', label: 'Matemáticas' },
+    { id: 'primaria', label: 'Primaria' },
+    { id: 'ciencias', label: 'Ciencias Naturales' },
+]
+
 const profileLabels: Record<ProfileType, string> = {
     aula: 'Docente de Aula',
     orientador: 'Docente Orientador',
     directivo: 'Directivo Docente',
+}
+
+const knowledgeAreaLabels: Record<string, string> = {
+    matematicas: 'Matemáticas',
+    primaria: 'Primaria',
+    ciencias: 'Ciencias Naturales',
 }
 
 const areaLabels: Record<string, string> = {
@@ -67,6 +86,7 @@ const areaLabels: Record<string, string> = {
 export function SimConfigForm() {
     const router = useRouter()
     const [selectedProfile, setSelectedProfile] = useState<ProfileType | null>('aula')
+    const [selectedKnowledgeArea, setSelectedKnowledgeArea] = useState<string | null>(null)
     const [selectedAreas, setSelectedAreas] = useState<string[]>(['fundamentos', 'pedagogicos'])
     const [showStartDialog, setShowStartDialog] = useState(false)
 
@@ -84,7 +104,10 @@ export function SimConfigForm() {
         }
     }
 
-    const isConfigurationValid = selectedProfile !== null && selectedAreas.length > 0
+    const isConfigurationValid =
+        selectedProfile !== null &&
+        selectedKnowledgeArea !== null &&
+        selectedAreas.length > 0
 
     return (
         <>
@@ -132,11 +155,43 @@ export function SimConfigForm() {
                 {/* Divider */}
                 <div className="mb-2 h-px bg-slate-200/60 dark:bg-slate-700/40" />
 
-                {/* Step 2 — Áreas */}
+                {/* Step 2 — Área de Conocimiento */}
                 <div className="mb-2">
                     <div className="mb-5 flex items-center gap-3">
                         <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200/50 bg-white/60 backdrop-blur-sm dark:border-blue-500/20 dark:bg-blue-500/10">
                             <span className="text-[12px] font-bold text-blue-600 dark:text-blue-400">2</span>
+                        </div>
+                        <h3 className="text-[16px] font-semibold text-slate-800 dark:text-slate-200">
+                            Área de Conocimiento
+                        </h3>
+                    </div>
+
+                    <Select value={selectedKnowledgeArea ?? ''} onValueChange={setSelectedKnowledgeArea}>
+                        <SelectTrigger className="w-full rounded-xl border-white/40 bg-white/60 backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70 dark:text-slate-100">
+                            <SelectValue placeholder="Selecciona tu especialidad" />
+                        </SelectTrigger>
+                        <SelectContent className="dark:bg-slate-800 dark:border-slate-700/40 dark:text-slate-100">
+                            {knowledgeAreas.map(({ id, label }) => (
+                                <SelectItem
+                                    key={id}
+                                    value={id}
+                                    className="dark:text-slate-200 dark:focus:bg-blue-500/15 dark:focus:text-blue-300"
+                                >
+                                    {label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                {/* Divider */}
+                <div className="mb-2 h-px bg-slate-200/60 dark:bg-slate-700/40" />
+
+                {/* Step 3 — Áreas */}
+                <div className="mb-2">
+                    <div className="mb-5 flex items-center gap-3">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200/50 bg-white/60 backdrop-blur-sm dark:border-blue-500/20 dark:bg-blue-500/10">
+                            <span className="text-[12px] font-bold text-blue-600 dark:text-blue-400">3</span>
                         </div>
                         <h3 className="text-[16px] font-semibold text-slate-800 dark:text-slate-200">
                             Áreas a Evaluar
@@ -222,6 +277,12 @@ export function SimConfigForm() {
                                 <span>{profileLabels[selectedProfile]}</span>
                             </div>
                         )}
+                        {selectedKnowledgeArea && (
+                            <div className="flex items-center gap-2 text-[13px] text-slate-700 dark:text-slate-300">
+                                <span className="font-semibold">Área:</span>
+                                <span>{knowledgeAreaLabels[selectedKnowledgeArea] ?? selectedKnowledgeArea}</span>
+                            </div>
+                        )}
                         <div className="flex flex-col gap-1 text-[13px] text-slate-700 dark:text-slate-300">
                             <span className="font-semibold">Áreas:</span>
                             <ul className="ml-4 list-disc space-y-0.5">
@@ -240,7 +301,7 @@ export function SimConfigForm() {
                             Cancelar
                         </Button>
                         <Button
-                            onClick={() => router.push('/quiz')}
+                            onClick={() => router.push('/sim/exam')}
                             className="bg-[#1877F2] text-white hover:bg-blue-600"
                         >
                             Iniciar Simulacro
