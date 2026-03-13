@@ -27,7 +27,7 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className="flex max-h-[80vh] max-w-2xl flex-col dark:border-slate-700/40 dark:bg-slate-800/90"
+        className="flex max-h-[80vh] max-w-2xl flex-col"
         showCloseButton={true}
       >
         <DialogHeader>
@@ -48,17 +48,17 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
             return (
               <div
                 key={q.id}
-                className="rounded-xl border border-slate-200/60 bg-white/80 p-4 dark:border-slate-700/40 dark:bg-slate-800/60"
+                className="rounded-lg border-2 border-foreground/30 bg-card p-4"
               >
-                <p className="text-[13px] font-semibold text-slate-800 dark:text-slate-200">
-                  <span className="text-blue-500">#{i + 1}</span> {q.text}
+                <p className="text-[13px] font-bold text-foreground">
+                  <span className="text-primary">#{i + 1}</span> {q.text}
                 </p>
 
                 <div
                   className={`mt-3 flex items-start gap-2 text-[12px] ${
                     isCorrect
-                      ? 'text-emerald-600 dark:text-emerald-400'
-                      : 'text-red-500 dark:text-red-400'
+                      ? 'text-accent'
+                      : 'text-destructive'
                   }`}
                 >
                   {isCorrect ? (
@@ -71,11 +71,11 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
 
                 {!isCorrect && (
                   <>
-                    <div className="mt-2 flex items-start gap-2 text-[12px] text-emerald-600 dark:text-emerald-400">
+                    <div className="mt-2 flex items-start gap-2 text-[12px] text-accent">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>Correcta ({q.correctAnswer}): {correctText}</span>
                     </div>
-                    <div className="mt-2 rounded-lg bg-blue-50/80 p-3 text-[12px] text-slate-600 dark:bg-blue-500/10 dark:text-slate-300">
+                    <div className="mt-2 rounded-md border-2 border-foreground/20 bg-secondary p-3 text-[12px] text-foreground">
                       {q.explanation}
                     </div>
                   </>

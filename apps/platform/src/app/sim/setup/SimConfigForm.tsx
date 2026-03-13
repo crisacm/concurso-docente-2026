@@ -81,14 +81,14 @@ export function SimConfigForm() {
 
     return (
         <>
-            <Card className="w-full rounded-2xl border-white/40 bg-white/60 p-3 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60 sm:p-6">
+            <Card className="w-full rounded-lg p-3 sm:p-6">
                 {/* Step 1 — Perfil */}
                 <div className="mb-2">
                     <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200/50 bg-white/60 backdrop-blur-sm dark:border-blue-500/20 dark:bg-blue-500/10">
-                            <span className="text-[12px] font-bold text-blue-600 dark:text-blue-400">1</span>
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
+                            <span className="text-[12px] font-bold text-primary">1</span>
                         </div>
-                        <h3 className="text-[16px] font-semibold text-slate-800 dark:text-slate-200">
+                        <h3 className="text-[16px] text-foreground">
                             Selecciona tu Perfil
                         </h3>
                     </div>
@@ -101,18 +101,18 @@ export function SimConfigForm() {
                                     key={id}
                                     role="button"
                                     tabIndex={0}
-                                    onClick={() => setSelectedProfile(id)}
-                                    onKeyDown={(e) => e.key === 'Enter' && setSelectedProfile(id)}
-                                    className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border px-4 py-5 transition-all duration-200 ${isSelected
-                                        ? 'border-blue-500/60 bg-blue-50/80 shadow-md shadow-blue-500/10 backdrop-blur-md dark:border-blue-500/40 dark:bg-blue-500/15'
-                                        : 'border-white/40 bg-white/60 shadow-sm backdrop-blur-md hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70'
-                                        }`}
-                                >
+                                        onClick={() => setSelectedProfile(id)}
+                                        onKeyDown={(e) => e.key === 'Enter' && setSelectedProfile(id)}
+                                        className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-4 transition-all duration-200 ${isSelected
+                                            ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
+                                            : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
+                                            }`}
+                                    >
                                     <Icon
-                                        className={`mb-2.5 h-7 w-7 ${isSelected ? 'text-blue-500 dark:text-blue-400' : 'text-slate-400 dark:text-slate-500'}`}
+                                        className={`mb-2.5 h-7 w-7 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}
                                     />
                                     <span
-                                        className={`text-[13px] font-semibold ${isSelected ? 'text-slate-800 dark:text-slate-200' : 'text-slate-500 dark:text-slate-400'}`}
+                                        className={`text-[13px] font-bold ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}
                                     >
                                         {label}
                                     </span>
@@ -123,37 +123,33 @@ export function SimConfigForm() {
                 </div>
 
                 {/* Divider */}
-                <div className="mb-2 h-px bg-slate-200/60 dark:bg-slate-700/40" />
+                <div className="mb-2 h-0.5 bg-foreground/10" />
 
                 {/* Step 2 — Área de Conocimiento */}
                 <div className="mb-2">
                     <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200/50 bg-white/60 backdrop-blur-sm dark:border-blue-500/20 dark:bg-blue-500/10">
-                            <span className="text-[12px] font-bold text-blue-600 dark:text-blue-400">2</span>
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
+                            <span className="text-[12px] font-bold text-primary">2</span>
                         </div>
-                        <h3 className="text-[16px] font-semibold text-slate-800 dark:text-slate-200">
+                        <h3 className="text-[16px] text-foreground">
                             Área de Conocimiento
                         </h3>
                     </div>
 
                     {topicsError && (
-                        <p className="mb-3 text-[12px] text-red-500 dark:text-red-400">{topicsError}</p>
+                        <p className="mb-3 text-[12px] text-destructive">{topicsError}</p>
                     )}
                     <Select
                         value={selectedTopicId ?? ''}
                         onValueChange={setSelectedTopicId}
                         disabled={topicsLoading || !!topicsError}
                     >
-                        <SelectTrigger className="w-full rounded-xl border-white/40 bg-white/60 backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70 dark:text-slate-100">
+                        <SelectTrigger className="w-full rounded-lg">
                             <SelectValue placeholder={topicsLoading ? 'Cargando áreas...' : 'Selecciona tu especialidad'} />
                         </SelectTrigger>
-                        <SelectContent className="dark:bg-slate-800 dark:border-slate-700/40 dark:text-slate-100">
+                        <SelectContent>
                             {topics.map(({ id, topic }) => (
-                                <SelectItem
-                                    key={id}
-                                    value={id}
-                                    className="dark:text-slate-200 dark:focus:bg-blue-500/15 dark:focus:text-blue-300"
-                                >
+                                <SelectItem key={id} value={id}>
                                     {topic}
                                 </SelectItem>
                             ))}
@@ -162,15 +158,15 @@ export function SimConfigForm() {
                 </div>
 
                 {/* Divider */}
-                <div className="mb-2 h-px bg-slate-200/60 dark:bg-slate-700/40" />
+                <div className="mb-2 h-0.5 bg-foreground/10" />
 
                 {/* Step 3 — Cantidad de preguntas */}
                 <div className="mb-2">
                     <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200/50 bg-white/60 backdrop-blur-sm dark:border-blue-500/20 dark:bg-blue-500/10">
-                            <span className="text-[12px] font-bold text-blue-600 dark:text-blue-400">3</span>
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
+                            <span className="text-[12px] font-bold text-primary">3</span>
                         </div>
-                        <h3 className="text-[16px] font-semibold text-slate-800 dark:text-slate-200">
+                        <h3 className="text-[16px] text-foreground">
                             Cantidad de Preguntas
                         </h3>
                     </div>
@@ -183,17 +179,17 @@ export function SimConfigForm() {
                                     key={count}
                                     role="button"
                                     tabIndex={0}
-                                    onClick={() => setSelectedCount(count)}
-                                    onKeyDown={(e) => e.key === 'Enter' && setSelectedCount(count)}
-                                    className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border px-4 py-4 transition-all duration-200 ${isSelected
-                                        ? 'border-blue-500/60 bg-blue-50/80 shadow-md shadow-blue-500/10 backdrop-blur-md dark:border-blue-500/40 dark:bg-blue-500/15'
-                                        : 'border-white/40 bg-white/60 shadow-sm backdrop-blur-md hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70'
-                                        }`}
-                                >
-                                    <span className={`text-[20px] font-bold ${isSelected ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400'}`}>
+                                        onClick={() => setSelectedCount(count)}
+                                        onKeyDown={(e) => e.key === 'Enter' && setSelectedCount(count)}
+                                        className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-4 transition-all duration-200 ${isSelected
+                                            ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
+                                            : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
+                                            }`}
+                                    >
+                                    <span className={`text-[20px] font-bold ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>
                                         {count}
                                     </span>
-                                    <span className={`text-[12px] font-medium ${isSelected ? 'text-slate-700 dark:text-slate-300' : 'text-slate-400 dark:text-slate-500'}`}>
+                                    <span className={`text-[12px] font-medium ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}>
                                         preguntas
                                     </span>
                                 </div>
@@ -208,15 +204,12 @@ export function SimConfigForm() {
                         type="submit"
                         disabled={!isConfigurationValid}
                         onClick={() => setShowStartDialog(true)}
-                        className={`flex w-full items-center justify-center gap-2 rounded-xl py-4 text-[14px] font-semibold transition-all ${isConfigurationValid
-                            ? 'bg-[#1877F2] text-white shadow-md hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98]'
-                            : 'cursor-not-allowed bg-slate-100 text-slate-400 dark:bg-slate-700/50 dark:text-slate-600'
-                            }`}
+                        className="w-full rounded-lg py-4 text-[14px]"
                     >
                         Comenzar Simulacro
                         <ArrowRight className="h-4 w-4" />
                     </Button>
-                    <p className="mt-3 text-center text-[11px] text-slate-400 dark:text-slate-500">
+                    <p className="mt-3 text-center text-[11px] text-muted-foreground">
                         Al comenzar, tendrás {timerMinutes[selectedCount]} min para completar las {selectedCount} preguntas.
                     </p>
                 </div>
@@ -224,10 +217,7 @@ export function SimConfigForm() {
 
             {/* Diálogo: confirmar inicio del simulacro */}
             <Dialog open={showStartDialog} onOpenChange={setShowStartDialog}>
-                <DialogContent
-                    showCloseButton={false}
-                    className="bg-white/90 backdrop-blur-xl border-white/40 rounded-2xl dark:bg-slate-800/90 dark:border-slate-700/40"
-                >
+                <DialogContent showCloseButton={false} className="rounded-lg">
                     <DialogHeader>
                         <DialogTitle>¿Iniciar el Simulacro?</DialogTitle>
                         <DialogDescription>
@@ -237,18 +227,18 @@ export function SimConfigForm() {
 
                     <div className="flex flex-col gap-3 py-1">
                         {selectedProfile && (
-                            <div className="flex items-center gap-2 text-[13px] text-slate-700 dark:text-slate-300">
-                                <span className="font-semibold">Perfil:</span>
+                            <div className="flex items-center gap-2 text-[13px] text-foreground">
+                                <span className="font-bold">Perfil:</span>
                                 <span>{profileLabels[selectedProfile]}</span>
                             </div>
                         )}
                         {selectedTopicId && (
-                            <div className="flex items-center gap-2 text-[13px] text-slate-700 dark:text-slate-300">
-                                <span className="font-semibold">Área:</span>
+                            <div className="flex items-center gap-2 text-[13px] text-foreground">
+                                <span className="font-bold">Área:</span>
                                 <span>{selectedTopicLabel}</span>
                             </div>
                         )}
-                        <p className="text-[12px] text-slate-500 dark:text-slate-400">
+                        <p className="text-[12px] text-muted-foreground">
                             Tendrás {timerMinutes[selectedCount]} min · {selectedCount} preguntas · distribución equitativa por componente
                         </p>
                     </div>
@@ -257,10 +247,7 @@ export function SimConfigForm() {
                         <Button variant="outline" onClick={() => setShowStartDialog(false)}>
                             Cancelar
                         </Button>
-                        <Button
-                            onClick={handleStart}
-                            className="bg-[#1877F2] text-white hover:bg-blue-600"
-                        >
+                        <Button onClick={handleStart}>
                             Iniciar Simulacro
                         </Button>
                     </DialogFooter>

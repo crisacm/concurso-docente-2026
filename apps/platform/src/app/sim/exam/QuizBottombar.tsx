@@ -24,14 +24,12 @@ export function QuizBottombar({
         onClick={onBack}
         disabled={!canGoBack}
         aria-label="Pregunta anterior"
-        className="flex items-center gap-2 rounded-full border border-white/40 bg-white/60 px-4 py-2 shadow-sm backdrop-blur-md transition-colors
+        className="flex items-center gap-2 rounded-lg border-2 border-foreground bg-card px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
           disabled:cursor-not-allowed disabled:opacity-40
-          hover:bg-white/80
-          dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70
-          dark:disabled:hover:bg-slate-800/60"
+          hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
-        <ChevronLeft className="h-4 w-4 text-slate-600 dark:text-slate-300" />
-        <span className="text-[13px] font-medium text-slate-700 dark:text-slate-200">Atrás</span>
+        <ChevronLeft className="h-4 w-4 text-foreground" />
+        <span className="text-[13px] font-bold text-foreground">Atrás</span>
       </button>
 
       {/* Botón Siguiente / Finalizar */}
@@ -39,19 +37,17 @@ export function QuizBottombar({
         onClick={onNext}
         disabled={!canGoNext}
         aria-label={isLastQuestion ? 'Finalizar simulacro' : 'Siguiente pregunta'}
-        className="flex items-center gap-2 rounded-full border px-4 py-2 shadow-sm backdrop-blur-md transition-colors
+        className="flex items-center gap-2 rounded-lg border-2 border-foreground bg-primary px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
           disabled:cursor-not-allowed disabled:opacity-40
-          border-blue-500/40 bg-blue-500/80 hover:bg-blue-500/90
-          dark:border-blue-400/40 dark:bg-blue-600/80 dark:hover:bg-blue-600/90
-          dark:disabled:hover:bg-blue-600/80"
+          hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
-        <span className="text-[13px] font-medium text-white">
+        <span className="text-[13px] font-bold text-primary-foreground">
           {isLastQuestion ? 'Finalizar' : 'Siguiente'}
         </span>
         {isLastQuestion ? (
-          <CheckCircle className="h-4 w-4 text-white" />
+          <CheckCircle className="h-4 w-4 text-primary-foreground" />
         ) : (
-          <ChevronRight className="h-4 w-4 text-white" />
+          <ChevronRight className="h-4 w-4 text-primary-foreground" />
         )}
       </button>
     </div>

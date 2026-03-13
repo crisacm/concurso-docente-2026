@@ -35,9 +35,9 @@ function formatDate(iso: string): string {
 }
 
 function scoreColor(score: number): string {
-  if (score >= 75) return 'bg-emerald-500'
-  if (score >= 50) return 'bg-blue-500'
-  return 'bg-slate-400'
+  if (score >= 75) return 'bg-accent text-accent-foreground'
+  if (score >= 50) return 'bg-primary text-primary-foreground'
+  return 'bg-muted text-muted-foreground'
 }
 
 // ─── SessionRowItem ───────────────────────────────────────────────────────────
@@ -52,44 +52,44 @@ function SessionRowItem({
   onToggle: () => void
 }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800 overflow-hidden">
+    <div className="rounded-lg border-2 border-foreground bg-card overflow-hidden">
       {/* Main row */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left"
+        className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-secondary transition-colors text-left"
       >
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="flex-shrink-0">
             <ChevronRight
-              className={`h-3.5 w-3.5 text-slate-400 transition-transform duration-200 ${
+              className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${
                 expanded ? 'rotate-90' : ''
               }`}
             />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-300 whitespace-nowrap">
+              <span className="text-[13px] font-bold text-foreground whitespace-nowrap">
                 #{row.number}
               </span>
-              <span className="text-[12px] text-slate-500 dark:text-slate-400 truncate">
+              <span className="text-[12px] text-muted-foreground truncate">
                 {row.topic}
               </span>
               {row.status === 'abandoned' && (
-                <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 whitespace-nowrap">
+                <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-foreground/20 dark:bg-amber-900/30 dark:text-amber-400 whitespace-nowrap">
                   Abandonado
                 </span>
               )}
             </div>
             <div className="flex items-center gap-2 mt-0.5">
-              <span className="text-[10px] text-slate-400 dark:text-slate-400">{row.date}</span>
-              <span className="text-[10px] text-slate-300 dark:text-slate-500">·</span>
-              <span className="text-[10px] text-slate-400 dark:text-slate-400">{row.duration}</span>
+              <span className="text-[10px] text-muted-foreground">{row.date}</span>
+              <span className="text-[10px] text-muted-foreground/50">·</span>
+              <span className="text-[10px] text-muted-foreground">{row.duration}</span>
             </div>
           </div>
         </div>
         <Badge
           variant="default"
-          className={`ml-3 flex-shrink-0 text-[13px] font-bold text-white ${scoreColor(row.score)}`}
+          className={`ml-3 flex-shrink-0 text-[13px] font-bold ${scoreColor(row.score)}`}
         >
           {row.score}
         </Badge>
@@ -102,25 +102,25 @@ function SessionRowItem({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-slate-200 dark:border-slate-700 px-3 py-3 bg-slate-50 dark:bg-slate-900">
+          <div className="border-t-2 border-foreground/20 px-3 py-3 bg-secondary">
             <div className="grid grid-cols-2 gap-4">
               {/* Axis */}
               <div>
-                <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2">
+                <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Eje
                 </p>
                 <div className="flex flex-col gap-2">
                   {row.axis.map(({ theme, score }) => (
                     <div key={theme}>
                       <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-[10px] text-slate-600 dark:text-slate-400">{theme}</span>
-                        <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">
+                        <span className="text-[10px] text-foreground">{theme}</span>
+                        <span className="text-[10px] font-bold text-foreground">
                           {score}%
                         </span>
                       </div>
-                      <div className="h-1 w-full rounded-full bg-slate-200 dark:bg-slate-600">
+                      <div className="h-1 w-full rounded-full bg-muted border border-foreground/10">
                         <div
-                          className="h-1 rounded-full bg-blue-500 transition-all"
+                          className="h-full rounded-full bg-primary transition-all"
                           style={{ width: `${score}%` }}
                         />
                       </div>
@@ -131,11 +131,11 @@ function SessionRowItem({
 
               {/* Componentes */}
               <div>
-                <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2">
+                <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Componentes
                 </p>
                 {row.components.length === 0 ? (
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500">Sin datos</p>
+                  <p className="text-[10px] text-muted-foreground">Sin datos</p>
                 ) : (
                   <div className="flex flex-col gap-2">
                     {row.components.map(({ name, correct, total }) => {
@@ -143,16 +143,16 @@ function SessionRowItem({
                       return (
                         <div key={name}>
                           <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-[10px] text-slate-600 dark:text-slate-400 truncate">
+                            <span className="text-[10px] text-foreground truncate">
                               {name}
                             </span>
-                            <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300 ml-1">
+                            <span className="text-[10px] font-bold text-foreground ml-1">
                               {pct}%
                             </span>
                           </div>
-                          <div className="h-1 w-full rounded-full bg-slate-200 dark:bg-slate-600">
+                          <div className="h-1 w-full rounded-full bg-muted border border-foreground/10">
                             <div
-                              className="h-1 rounded-full bg-violet-500 transition-all"
+                              className="h-1 rounded-full bg-accent transition-all"
                               style={{ width: `${pct}%` }}
                             />
                           </div>
@@ -290,14 +290,14 @@ export function HistorialModal({ userId }: { userId: string }) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="text-[10px] font-bold tracking-wider uppercase text-blue-600 hover:text-blue-700 dark:text-blue-400">
+        <button className="text-[10px] font-bold tracking-wider uppercase text-primary hover:text-primary/80">
           Ver Todo
         </button>
       </DialogTrigger>
 
       <DialogContent className="max-w-lg w-full">
         <DialogHeader>
-          <DialogTitle className="text-[15px] font-semibold text-slate-800 dark:text-slate-100">
+          <DialogTitle className="text-[15px] font-bold text-foreground">
             Historial de Simulacros
           </DialogTitle>
         </DialogHeader>
@@ -305,10 +305,10 @@ export function HistorialModal({ userId }: { userId: string }) {
         <div className="overflow-y-auto max-h-[60vh] pr-1">
           {loading ? (
             <div className="flex items-center justify-center py-10">
-              <Loader2 className="h-5 w-5 animate-spin text-slate-400" />
+              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
             </div>
           ) : rows.length === 0 ? (
-            <p className="py-10 text-center text-[13px] text-slate-400 dark:text-slate-500">
+            <p className="py-10 text-center text-[13px] text-muted-foreground">
               Aún no tienes simulacros registrados.
             </p>
           ) : (

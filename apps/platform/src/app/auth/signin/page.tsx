@@ -4,14 +4,11 @@ import Link from 'next/link';
 
 export default function LoginPage() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center p-4 relative overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-            {/* Fondo con gradiente radial simulando la imagen */}
-            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-100 dark:from-slate-800 dark:via-slate-900 dark:to-slate-950 opacity-80" />
-
+        <div className="flex min-h-screen flex-col items-center justify-center p-4 relative overflow-hidden">
             <div className="z-10 w-full max-w-sm flex flex-col items-center">
                 <div className="flex flex-col items-center gap-3 mb-10 text-center">
-                    <h1 className="text-[28px] font-bold text-slate-900 dark:text-slate-100 tracking-tight">Concurso Docente 2026</h1>
-                    <p className="text-[13px] text-slate-500 dark:text-slate-400 max-w-[300px] leading-relaxed">
+                    <h1 className="text-[28px] text-foreground tracking-tight">Concurso Docente 2026</h1>
+                    <p className="text-[13px] text-muted-foreground max-w-[300px] leading-relaxed">
                         Simulacro no oficial basado en la normativa pública del Ministerio de Educación para práctica pedagógica
                     </p>
                 </div>
@@ -19,7 +16,7 @@ export default function LoginPage() {
                 <form action={signInWithGoogle} className="w-full mb-10">
                     <button
                         type="submit"
-                        className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3.5 text-[14px] font-medium text-slate-700 dark:text-slate-300 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-700 hover:shadow focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-700 focus:ring-offset-2 dark:focus:ring-offset-slate-900 cursor-pointer"
+                        className="flex w-full items-center justify-center gap-3 rounded-lg border border-foreground/30 bg-card px-4 py-3.5 text-[14px] font-bold text-foreground shadow-[var(--shadow-nb-sm)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px] cursor-pointer"
                     >
                         <svg className="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24">
                             <path
@@ -43,11 +40,11 @@ export default function LoginPage() {
                     </button>
                 </form>
 
-                <div className="w-full flex flex-col items-center border-t border-slate-200/60 dark:border-slate-700/60 pt-8 pb-12 gap-3">
-                    <p className="text-[11px] font-bold tracking-[0.15em] text-slate-400 dark:text-slate-500 uppercase">
+                <div className="w-full flex flex-col items-center border-t-2 border-foreground/20 pt-8 pb-12 gap-3">
+                    <p className="text-[11px] font-bold tracking-[0.15em] text-muted-foreground uppercase">
                         Acceso Seguro
                     </p>
-                    <p className="text-[12px] text-slate-400 dark:text-slate-500 text-center max-w-[280px] leading-relaxed">
+                    <p className="text-[12px] text-muted-foreground text-center max-w-[280px] leading-relaxed">
                         Al continuar, el usuario acepta los términos, condiciones y políticas de seguridad del sitio.
                     </p>
                 </div>
@@ -58,7 +55,7 @@ export default function LoginPage() {
                     href="https://github.com/crisacm/concurso-docente-2026"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[13px] text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                    className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
                 >
                     <Github className="h-4 w-4" />
                     <span>Proyecto de código abierto bajo licencia GNU GPLv3</span>

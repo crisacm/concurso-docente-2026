@@ -39,10 +39,10 @@ export function DashboardChart({ data }: DashboardChartProps) {
         {data.map((d) => (
           <span key={d.name} className="flex items-center gap-1.5">
             <span
-              className="h-2 w-2 shrink-0 rounded-full"
+              className="h-2 w-2 shrink-0 rounded-full border border-foreground/30"
               style={{ backgroundColor: d.fill }}
             />
-            <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
               {d.name} {d.score}%
             </span>
           </span>

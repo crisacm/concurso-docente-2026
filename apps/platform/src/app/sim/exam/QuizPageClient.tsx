@@ -332,7 +332,7 @@ export function QuizPageClient({
   if (error) {
     return (
       <main className="mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
-        <p className="text-[16px] font-semibold text-red-600 dark:text-red-400">{error}</p>
+        <p className="text-[16px] font-bold text-destructive">{error}</p>
         <Button className="mt-6" onClick={() => router.push('/sim/setup')}>
           Volver a la configuración
         </Button>
@@ -346,14 +346,14 @@ export function QuizPageClient({
 
       {loading ? (
         <main className="mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
-          <h1 className="text-[24px] font-bold text-slate-800 dark:text-slate-100">
+          <h1 className="text-[24px] text-foreground">
             Cargando tu Simulacro...
           </h1>
-          <p className="mt-4 max-w-[400px] text-slate-500 dark:text-slate-400">
+          <p className="mt-4 max-w-[400px] text-muted-foreground">
             Estamos preparando las preguntas en base al perfil y al área seleccionada.
           </p>
           <div className="mt-8 flex justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+            <div className="h-8 w-8 animate-spin rounded-md border-4 border-primary border-t-transparent" />
           </div>
         </main>
       ) : (
@@ -384,7 +384,7 @@ export function QuizPageClient({
       <Dialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
         <DialogContent
           showCloseButton={false}
-          className="rounded-2xl border-white/40 bg-white/90 backdrop-blur-xl dark:border-slate-700/40 dark:bg-slate-800/90"
+          className="rounded-lg"
         >
           <DialogHeader>
             <DialogTitle>¿Cancelar el Simulacro?</DialogTitle>
@@ -407,7 +407,7 @@ export function QuizPageClient({
       <Dialog open={showFinalizeDialog} onOpenChange={setShowFinalizeDialog}>
         <DialogContent
           showCloseButton={false}
-          className="rounded-2xl border-white/40 bg-white/90 backdrop-blur-xl dark:border-slate-700/40 dark:bg-slate-800/90"
+          className="rounded-lg"
         >
           <DialogHeader>
             <DialogTitle>¿Finalizar el Simulacro?</DialogTitle>

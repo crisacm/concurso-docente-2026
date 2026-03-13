@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Architects_Daughter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -11,6 +11,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
   weight: ['300', '400'],
+})
+
+const architectsDaughter = Architects_Daughter({
+  subsets: ['latin'],
+  variable: '--font-architects-daughter',
+  weight: '400',
 })
 
 export const metadata: Metadata = {
@@ -28,14 +34,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased text-slate-800 dark:text-slate-200 bg-[#f8f9fa] dark:bg-slate-900 transition-colors duration-300`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${architectsDaughter.variable} font-sans antialiased relative`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange={false}
         >
-          {children}
+          <div className="relative z-10">
+            {children}
+          </div>
           <Toaster richColors position="bottom-center" />
         </ThemeProvider>
       </body>

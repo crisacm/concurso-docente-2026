@@ -4,45 +4,52 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ─── Neo-Brutalism School Theme — Dark Mode ─────────────────────────────── */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.23 0.02 250);       /* #1E293B pizarra oscura */
+  --foreground: oklch(0.90 0.01 70);         /* #E8E0D4 crema claro */
+  --card: oklch(0.29 0.02 240);              /* #283548 azul pizarra */
+  --card-foreground: oklch(0.90 0.01 70);
+  --popover: oklch(0.29 0.02 240);
+  --popover-foreground: oklch(0.90 0.01 70);
+  --primary: oklch(0.78 0.10 280);           /* Lila suave oscuro */
+  --primary-foreground: oklch(0.15 0.02 280);
+  --secondary: oklch(0.31 0.02 240);         /* #334155 pizarra suave */
+  --secondary-foreground: oklch(0.90 0.01 70);
+  --muted: oklch(0.34 0.02 250);             /* #374151 gris pizarra */
+  --muted-foreground: oklch(0.65 0.01 70);
+  --accent: oklch(0.82 0.14 140);            /* Verde pastel oscuro */
+  --accent-foreground: oklch(0.15 0.05 140);
+  --destructive: oklch(0.70 0.17 25);        /* #F87171 rojo suave */
+  --border: oklch(0.45 0.02 250);            /* #475569 gris suave */
+  --input: oklch(0.45 0.02 250);
+  --ring: oklch(0.70 0.15 250);
+  --chart-1: oklch(0.70 0.15 250);
+  --chart-2: oklch(0.78 0.15 155);
+  --chart-3: oklch(0.80 0.14 85);
+  --chart-4: oklch(0.70 0.17 300);
+  --chart-5: oklch(0.70 0.17 25);
+  --sidebar: oklch(0.25 0.02 240);
+  --sidebar-foreground: oklch(0.90 0.01 70);
+  --sidebar-primary: oklch(0.70 0.15 250);
+  --sidebar-primary-foreground: oklch(0.90 0.01 70);
+  --sidebar-accent: oklch(0.31 0.02 240);
+  --sidebar-accent-foreground: oklch(0.90 0.01 70);
+  --sidebar-border: oklch(0.45 0.02 250);
+  --sidebar-ring: oklch(0.70 0.15 250);
+
+  /* Notebook grid — dark */
+  --nb-grid-color: oklch(0.35 0.01 250 / 8%);
+  --nb-margin-color: oklch(0.50 0.15 25 / 10%);
 }
 
+/* ─── Theme inline tokens ────────────────────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-handwritten: var(--font-architects-daughter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -79,48 +86,95 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --shadow-nb: 2px 2px 0 var(--border);
+  --shadow-nb-sm: 1px 1px 0 var(--border);
 }
 
+/* ─── Neo-Brutalism School Theme — Light Mode (Root) ─────────────────────── */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.5rem;
+  --background: oklch(0.95 0.01 80);         /* #F5F0E8 crema/cartón */
+  --foreground: oklch(0.22 0.01 0);           /* #2D2D2D casi negro */
+  --card: oklch(0.99 0.005 90);              /* #FFFDF7 blanco cálido */
+  --card-foreground: oklch(0.22 0.01 0);
+  --popover: oklch(0.99 0.005 90);
+  --popover-foreground: oklch(0.22 0.01 0);
+  --primary: oklch(0.82 0.08 280);           /* Lila pastel */
+  --primary-foreground: oklch(0.18 0.02 280);
+  --secondary: oklch(0.93 0.02 80);          /* #F3E8D4 cartón suave */
+  --secondary-foreground: oklch(0.22 0.01 0);
+  --muted: oklch(0.90 0.02 75);              /* #E8DFD0 beige */
+  --muted-foreground: oklch(0.45 0.01 0);
+  --accent: oklch(0.88 0.12 140);            /* Verde pastel */
+  --accent-foreground: oklch(0.18 0.05 140);
+  --destructive: oklch(0.53 0.22 25);        /* #DC2626 rojo marcador */
+  --border: oklch(0.40 0.01 0);              /* #666 gris medio — borde suave */
+  --input: oklch(0.22 0.01 0);
+  --ring: oklch(0.55 0.20 260);
+  --chart-1: oklch(0.55 0.20 260);
+  --chart-2: oklch(0.60 0.18 135);
+  --chart-3: oklch(0.80 0.14 85);
+  --chart-4: oklch(0.60 0.20 300);
+  --chart-5: oklch(0.53 0.22 25);
+  --sidebar: oklch(0.93 0.02 80);
+  --sidebar-foreground: oklch(0.22 0.01 0);
+  --sidebar-primary: oklch(0.55 0.20 260);
+  --sidebar-primary-foreground: oklch(0.98 0.005 90);
+  --sidebar-accent: oklch(0.93 0.02 80);
+  --sidebar-accent-foreground: oklch(0.22 0.01 0);
+  --sidebar-border: oklch(0.22 0.01 0);
+  --sidebar-ring: oklch(0.55 0.20 260);
+
+  /* Notebook grid — light */
+  --nb-grid-color: oklch(0.70 0.01 250 / 8%);
+  --nb-margin-color: oklch(0.60 0.20 20 / 10%);
 }
 
+/* ─── Base layer ─────────────────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Notebook grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      /* Red margin line */
+      linear-gradient(
+        to right,
+        transparent 59px,
+        var(--nb-margin-color) 59px,
+        var(--nb-margin-color) 60px,
+        transparent 60px
+      ),
+      /* Horizontal lines */
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 23px,
+        var(--nb-grid-color) 23px,
+        var(--nb-grid-color) 24px
+      ),
+      /* Vertical lines */
+      repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent 23px,
+        var(--nb-grid-color) 23px,
+        var(--nb-grid-color) 24px
+      );
+  }
+
+  /* Handwritten font replaced with sans geometry */
+  h1, h2, h3 {
+    font-family: var(--font-sans), sans-serif;
   }
 }

@@ -51,7 +51,7 @@ function CircularProgress({ percentage, correct, total }: CircularProgressProps)
         r={radius}
         fill="none"
         strokeWidth={strokeWidth}
-        className="stroke-slate-200/40 dark:stroke-slate-700/40"
+        className="stroke-muted"
       />
       <circle
         cx={cx}
@@ -62,7 +62,7 @@ function CircularProgress({ percentage, correct, total }: CircularProgressProps)
         strokeLinecap="round"
         strokeDasharray={circumference}
         strokeDashoffset={dashOffset}
-        className="stroke-blue-400"
+        className="stroke-primary"
         transform={`rotate(-90 ${cx} ${cy})`}
       />
       <text
@@ -70,7 +70,7 @@ function CircularProgress({ percentage, correct, total }: CircularProgressProps)
         y={cy - 4}
         textAnchor="middle"
         dominantBaseline="middle"
-        className="fill-slate-800 dark:fill-white/90 font-bold"
+        className="fill-foreground font-bold"
         fontSize="26"
         fontWeight="700"
       >
@@ -81,7 +81,7 @@ function CircularProgress({ percentage, correct, total }: CircularProgressProps)
         y={cy + 18}
         textAnchor="middle"
         dominantBaseline="middle"
-        className="fill-slate-500 dark:fill-white/50"
+        className="fill-muted-foreground"
         fontSize="13"
       >
         /{total}
@@ -99,9 +99,9 @@ const AREA_ICONS: Record<Componente, React.ElementType> = {
 }
 
 const LEVEL_CLASSES: Record<PerformanceLevel, string> = {
-  Alta: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400',
-  Media: 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400',
-  Baja: 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400',
+  Alta: 'bg-accent text-accent-foreground border border-foreground/30',
+  Media: 'bg-amber-100 text-amber-800 border border-foreground/30 dark:bg-amber-900/30 dark:text-amber-400',
+  Baja: 'bg-destructive/10 text-destructive border border-foreground/30',
 }
 
 function AreaCard({ id, label, correct, total }: AreaResult) {
@@ -110,24 +110,24 @@ function AreaCard({ id, label, correct, total }: AreaResult) {
   const Icon = AREA_ICONS[id] ?? BookOpen
 
   return (
-    <div className="rounded-2xl border border-white/40 bg-white/60 p-4 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+    <div className="rounded-lg border border-foreground/30 bg-card p-4 shadow-[var(--shadow-nb-sm)]">
       <div className="mb-2 flex items-center justify-between">
-        <Icon className="h-5 w-5 text-slate-500 dark:text-slate-400" />
-        <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide ${LEVEL_CLASSES[level]}`}>
+        <Icon className="h-5 w-5 text-muted-foreground" />
+        <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wide ${LEVEL_CLASSES[level]}`}>
           {level}
         </span>
       </div>
-      <p className="text-[13px] font-semibold text-slate-800 dark:text-slate-200">{label}</p>
+      <p className="text-[13px] font-bold text-foreground">{label}</p>
       <div className="mt-1 flex items-baseline gap-1">
-        <span className="text-[24px] font-bold leading-none text-slate-700 dark:text-slate-100">
+        <span className="text-[24px] font-bold leading-none text-foreground">
           {pct}%
         </span>
-        <span className="text-[12px] text-slate-400 dark:text-slate-500">
+        <span className="text-[12px] text-muted-foreground">
           aciertos ({correct}/{total})
         </span>
       </div>
-      <div className="mt-2 h-2 w-full rounded-full bg-slate-200/60 dark:bg-slate-700/40">
-        <div style={{ width: `${pct}%` }} className="h-full rounded-full bg-blue-500 dark:bg-blue-400" />
+      <div className="mt-2 h-2 w-full rounded-md border border-foreground/30 bg-muted">
+        <div style={{ width: `${pct}%` }} className="h-full rounded-sm bg-primary" />
       </div>
     </div>
   )
@@ -154,23 +154,23 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
 
       <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
         {/* Hero Card */}
-        <div className="mb-8 flex flex-col gap-6 overflow-hidden rounded-2xl border-l border-t border-b border-white/10 bg-gradient-to-r from-blue-900/75 via-blue-800/55 to-blue-900/0 px-6 py-5 backdrop-blur-sm dark:border-blue-900/20 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-8 flex flex-col gap-6 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-6 py-5 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <BarChart className="h-5 w-5 text-white/70" />
-              <h1 className="font-mono text-[22px] font-light leading-tight text-white/90 sm:text-[26px]">
+              <BarChart className="h-5 w-5 text-primary-foreground/70" />
+              <h1 className="text-[20px] font-bold leading-tight text-primary-foreground sm:text-[24px]">
                 {isAbandoned ? 'Simulacro Abandonado' : 'Resultados del Simulacro'}
               </h1>
             </div>
-            <p className="mt-1 text-[12px] text-white/50">
+            <p className="mt-1 text-[12px] text-primary-foreground/60">
               {isAbandoned
                 ? 'Completaste parcialmente el examen. Aquí está tu resumen.'
                 : 'Has completado el examen exitosamente. Aquí tienes un resumen detallado.'}
             </p>
           </div>
 
-          <div className="flex shrink-0 flex-col items-center rounded-xl border border-slate-200/50 bg-white/75 px-5 py-4 backdrop-blur-md dark:border-white/15 dark:bg-slate-800/70">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-white/50">
+          <div className="flex shrink-0 flex-col items-center rounded-lg border border-foreground/30 bg-card px-5 py-4 shadow-[var(--shadow-nb-sm)]">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Puntaje Global
             </p>
             <CircularProgress percentage={globalPct} correct={score} total={total} />
@@ -180,7 +180,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
         {/* Desglose por Componente */}
         {areas.some((a) => a.total > 0) && (
           <div className="mb-6">
-            <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <h2 className="mb-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
               Desglose por Componente
             </h2>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -192,7 +192,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
         )}
 
         {total === 0 && (
-          <p className="mb-6 text-center text-[14px] text-slate-500 dark:text-slate-400">
+          <p className="mb-6 text-center text-[14px] text-muted-foreground">
             No respondiste ninguna pregunta en este simulacro.
           </p>
         )}
@@ -202,7 +202,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
           {questions.length > 0 && (
             <Button
               onClick={() => setShowReviewModal(true)}
-              className="gap-2 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+              className="gap-2"
             >
               <Eye className="h-4 w-4" />
               Revisar Respuestas

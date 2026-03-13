@@ -32,38 +32,38 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
       <button
         onClick={onCancelClick}
         aria-label="Cancelar examen"
-        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/60 shadow-sm backdrop-blur-md transition-colors hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-800/60 dark:hover:bg-slate-700/70"
+        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card shadow-[var(--shadow-nb-sm)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
-        <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+        <GraduationCap className="h-5 w-5 text-primary" />
       </button>
 
       {/* Zona central: toggle día/noche */}
       <button
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
-        className="relative flex items-center gap-1 overflow-hidden rounded-full border border-white/40 bg-white/60 p-1 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60"
+        className="relative flex items-center gap-1 overflow-hidden rounded-full border-2 border-foreground bg-card p-1 shadow-[var(--shadow-nb-sm)]"
         aria-label="Alternar tema"
       >
         {/* Thumb animado */}
         <span
-          className="absolute h-7 w-7 rounded-full bg-white shadow-md transition-transform duration-300 dark:bg-slate-600"
+          className="absolute h-7 w-7 rounded-full bg-secondary border border-foreground/20 transition-transform duration-300"
           style={{ transform: isDark ? 'translateX(32px)' : 'translateX(0)' }}
         />
         {/* Sol */}
         <span className="relative z-10 flex h-7 w-7 items-center justify-center">
-          <Sun className="h-3.5 w-3.5 text-amber-500 dark:text-slate-400" />
+          <Sun className="h-3.5 w-3.5 text-amber-500" />
         </span>
         {/* Luna */}
         <span className="relative z-10 flex h-7 w-7 items-center justify-center">
-          <Moon className="h-3.5 w-3.5 text-slate-400 dark:text-blue-400" />
+          <Moon className="h-3.5 w-3.5 text-primary" />
         </span>
       </button>
 
-      {/* Zona derecha: pill glassmorphism con timer y cancelar */}
-      <div className="flex items-center gap-3 rounded-full border border-white/40 bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
+      {/* Zona derecha: pill con timer y cancelar */}
+      <div className="flex items-center gap-3 rounded-lg border-2 border-foreground bg-card px-3 py-1.5 shadow-[var(--shadow-nb-sm)]">
         {/* Timer */}
         <div className="flex items-center gap-1.5">
-          <Clock className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
-          <span className="font-mono text-[13px] font-semibold text-slate-700 dark:text-slate-200">
+          <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+          <span className="font-mono text-[13px] font-bold text-foreground">
             {mounted ? formatTime(timeLeft) : '60:00'}
           </span>
         </div>
@@ -75,7 +75,7 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
           variant="ghost"
           size="sm"
           onClick={onCancelClick}
-          className="h-auto px-2 py-0.5 text-[12px] text-slate-500 transition-colors hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+          className="h-auto px-2 py-0.5 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
         >
           Cancelar
         </Button>
