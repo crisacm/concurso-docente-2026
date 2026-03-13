@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
 import {
   Dialog,
@@ -10,7 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui'
 import { Badge } from '@/components/ui'
-import { ChevronRight, Loader2 } from 'lucide-react'
+import { ChevronRight, Loader2, ArrowRight } from 'lucide-react'
 import type { AxisTheme, Componente } from '@/types'
 
 // ─── Local types ──────────────────────────────────────────────────────────────
@@ -52,7 +53,7 @@ function SessionRowItem({
   onToggle: () => void
 }) {
   return (
-    <div className="rounded-lg border-2 border-foreground bg-card overflow-hidden">
+    <div className="rounded-lg border-2 border-foreground/30 bg-card overflow-hidden">
       {/* Main row */}
       <button
         onClick={onToggle}
@@ -61,9 +62,8 @@ function SessionRowItem({
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="flex-shrink-0">
             <ChevronRight
-              className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${
-                expanded ? 'rotate-90' : ''
-              }`}
+              className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${expanded ? 'rotate-90' : ''
+                }`}
             />
           </div>
           <div className="min-w-0">
@@ -71,25 +71,25 @@ function SessionRowItem({
               <span className="text-[13px] font-bold text-foreground whitespace-nowrap">
                 #{row.number}
               </span>
-              <span className="text-[12px] text-muted-foreground truncate">
+              <span className="text-[13px] text-muted-foreground truncate font-semibold">
                 {row.topic}
               </span>
               {row.status === 'abandoned' && (
-                <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-foreground/20 dark:bg-amber-900/30 dark:text-amber-400 whitespace-nowrap">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-foreground/20 dark:bg-amber-900/30 dark:text-amber-400 whitespace-nowrap">
                   Abandonado
                 </span>
               )}
             </div>
             <div className="flex items-center gap-2 mt-0.5">
-              <span className="text-[10px] text-muted-foreground">{row.date}</span>
-              <span className="text-[10px] text-muted-foreground/50">·</span>
-              <span className="text-[10px] text-muted-foreground">{row.duration}</span>
+              <span className="text-[11px] text-muted-foreground">{row.date}</span>
+              <span className="text-[11px] text-muted-foreground/50">·</span>
+              <span className="text-[11px] text-muted-foreground">{row.duration}</span>
             </div>
           </div>
         </div>
         <Badge
           variant="default"
-          className={`ml-3 flex-shrink-0 text-[13px] font-bold ${scoreColor(row.score)}`}
+          className={`ml-3 border-1 border-foreground/50 flex-shrink-0 text-[13px] font-bold ${scoreColor(row.score)} shadow-[var(--shadow-nb-sm)]`}
         >
           {row.score}
         </Badge>
@@ -97,24 +97,23 @@ function SessionRowItem({
 
       {/* Expanded panel */}
       <div
-        className={`grid transition-[grid-template-rows] duration-200 ease-in-out ${
-          expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-        }`}
+        className={`grid transition-[grid-template-rows] duration-200 ease-in-out ${expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+          }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t-2 border-foreground/20 px-3 py-3 bg-secondary">
+          <div className="border-t-2 border-foreground/20 px-3 py-3 bg-secondary/70">
             <div className="grid grid-cols-2 gap-4">
               {/* Axis */}
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Eje
                 </p>
                 <div className="flex flex-col gap-2">
                   {row.axis.map(({ theme, score }) => (
                     <div key={theme}>
                       <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-[10px] text-foreground">{theme}</span>
-                        <span className="text-[10px] font-bold text-foreground">
+                        <span className="text-[12px] text-foreground">{theme}</span>
+                        <span className="text-[12px] font-bold text-foreground">
                           {score}%
                         </span>
                       </div>
@@ -131,11 +130,11 @@ function SessionRowItem({
 
               {/* Componentes */}
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Componentes
                 </p>
                 {row.components.length === 0 ? (
-                  <p className="text-[10px] text-muted-foreground">Sin datos</p>
+                  <p className="text-[12px] text-muted-foreground">Sin datos</p>
                 ) : (
                   <div className="flex flex-col gap-2">
                     {row.components.map(({ name, correct, total }) => {
@@ -143,10 +142,10 @@ function SessionRowItem({
                       return (
                         <div key={name}>
                           <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-[10px] text-foreground truncate">
+                            <span className="text-[12px] text-foreground truncate">
                               {name}
                             </span>
-                            <span className="text-[10px] font-bold text-foreground ml-1">
+                            <span className="text-[12px] font-bold text-foreground ml-1">
                               {pct}%
                             </span>
                           </div>
@@ -163,6 +162,15 @@ function SessionRowItem({
                 )}
               </div>
             </div>
+            <div className="mt-3 flex justify-end border-t border-foreground/10 pt-3">
+              <Link
+                href={`/sim/result?session_id=${row.id}`}
+                className="flex items-center gap-1.5 rounded-md border border-foreground/20 bg-card px-3 py-1.5 text-[11px] font-bold text-foreground transition-all hover:border-foreground/40 hover:shadow-[var(--shadow-nb-sm)]"
+              >
+                Ver resultado
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -172,7 +180,7 @@ function SessionRowItem({
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function HistorialModal({ userId }: { userId: string }) {
+export function HistorialModal({ userId, triggerLabel }: { userId: string; triggerLabel?: string }) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [rows, setRows] = useState<SessionRow[]>([])
@@ -223,9 +231,9 @@ export function HistorialModal({ userId }: { userId: string }) {
 
         const duration = session.completed_at
           ? `${Math.round(
-              (new Date(session.completed_at).getTime() - new Date(session.started_at).getTime()) /
-                60000,
-            )} min`
+            (new Date(session.completed_at).getTime() - new Date(session.started_at).getTime()) /
+            60000,
+          )} min`
           : '—'
 
         const axis = AXIS.map((theme) => {
@@ -290,8 +298,8 @@ export function HistorialModal({ userId }: { userId: string }) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="text-[10px] font-bold tracking-wider uppercase text-primary hover:text-primary/80">
-          Ver Todo
+        <button className="text-[10px] cursor-pointer font-bold tracking-wider uppercase text-black/60 hover:text-primary/90 transition-colors duration-200">
+          {triggerLabel ?? 'Ver Todo'}
         </button>
       </DialogTrigger>
 

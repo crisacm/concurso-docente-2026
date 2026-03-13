@@ -17,7 +17,7 @@ import {
 import { cn } from '@/lib/utils'
 import { signOut } from '@/app/auth/signout/actions'
 
-const subscribe = () => () => {}
+const subscribe = () => () => { }
 const useMounted = () => useSyncExternalStore(subscribe, () => true, () => false)
 
 interface TopbarProps {
@@ -53,6 +53,13 @@ export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
     }
   }, [pillExpanded])
 
+  useEffect(() => {
+    if (!pillExpanded) return
+    const handler = () => setPillExpanded(false)
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [pillExpanded])
+
   return (
     <div className="fixed top-5 right-0 left-0 z-50 mx-auto flex max-w-[800px] items-center justify-between px-6">
       {/* Zona izquierda: logo / home */}
@@ -86,11 +93,14 @@ export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
       </button>
 
       {/* Zona derecha: pill de usuario */}
-      <div ref={pillRef} className="relative">
+      <div ref={pillRef} className="relative h-[40px] w-[40px] sm:h-auto sm:w-auto">
         {/* Trigger móvil: solo avatar, visible únicamente en < sm */}
         <button
           onClick={() => setPillExpanded(true)}
-          className="sm:hidden flex h-[40px] w-[40px] items-center justify-center rounded-lg border border-foreground/30 bg-card shadow-[var(--shadow-nb-sm)]"
+          className={cn(
+            'absolute inset-0 sm:hidden flex items-center justify-center rounded-lg border border-foreground/30 bg-card shadow-[var(--shadow-nb-sm)]',
+            pillExpanded && 'hidden'
+          )}
           aria-label="Ver opciones de usuario"
         >
           {avatarUrl ? (
@@ -106,10 +116,14 @@ export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
         {/* Pill completo: siempre visible en sm+, en móvil solo cuando pillExpanded */}
         <div
           className={cn(
-            'items-center gap-3 rounded-lg border border-foreground/30 bg-card px-3 py-1.5 shadow-[var(--shadow-nb-sm)]',
+            'flex items-center gap-3 rounded-lg border border-foreground/30 bg-card px-3 py-1.5 shadow-[var(--shadow-nb-sm)]',
+            'absolute right-0 top-0 z-20',
+            'sm:relative sm:top-auto sm:right-auto sm:z-auto',
+            'transition-all duration-200 origin-top-right w-auto',
+            'min-w-60',
             pillExpanded
-              ? 'absolute right-0 top-0 z-20 flex sm:relative sm:top-auto sm:right-auto sm:z-auto'
-              : 'hidden sm:flex'
+              ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 scale-95 -translate-y-1 pointer-events-none sm:opacity-100 sm:scale-100 sm:translate-y-0 sm:pointer-events-auto'
           )}
         >
           {/* Avatar */}
@@ -124,10 +138,10 @@ export function Topbar({ email, name, avatarUrl, onHomeClick }: TopbarProps) {
 
           {/* Nombre + email */}
           <div className="flex flex-col">
-            <span className="text-[12px] font-bold text-foreground">
+            <span className="text-[12px] font-bold text-foreground text-ellipsis overflow-hidden">
               {displayName}
             </span>
-            <span className="max-w-[120px] truncate text-[10px] text-muted-foreground">
+            <span className="max-w-[120px] truncate text-[10px] text-muted-foreground text-ellipsis overflow-hidden">
               {email}
             </span>
           </div>

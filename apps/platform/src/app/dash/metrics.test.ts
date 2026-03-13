@@ -6,11 +6,12 @@ const makeAnswer = (
   sessionId: string,
   isCorrect: boolean,
   axisTheme: 'Contexto' | 'Planeacion' | 'Praxis' | 'Ambiente' = 'Contexto',
+  componente: 'Pedagógico' | 'Fundamentos' | 'Psicotécnico' = 'Pedagógico',
 ): AnswerRow => ({
   is_correct: isCorrect,
   session_id: sessionId,
   question_bank: {
-    componente: 'Pedagógico',
+    componente,
     metadata: { axis_theme: axisTheme },
   },
 })
@@ -21,7 +22,21 @@ describe('computeDashboardMetrics', () => {
     expect(result.globalScore).toBe(0)
     expect(result.record).toBe(0)
     expect(result.scoreBySessionId).toEqual({})
-    expect(result.chartData.every((d) => d.score === 0)).toBe(true)
+    expect(result.radarData).toHaveLength(7)
+    expect(result.radarData.every((d) => d.score === 0)).toBe(true)
+  })
+
+  it('radarData has correct subjects in order', () => {
+    const result = computeDashboardMetrics([], [])
+    expect(result.radarData.map((d) => d.subject)).toEqual([
+      'Contexto',
+      'Planeación',
+      'Praxis',
+      'Ambiente',
+      'Generales',
+      'Pedagógicas',
+      'Psicotécnicas',
+    ])
   })
 
   it('computes global score as average of per-session scores', () => {
@@ -66,10 +81,25 @@ describe('computeDashboardMetrics', () => {
       makeAnswer('s1', true, 'Praxis'),
     ]
     const result = computeDashboardMetrics(sessions, answers)
-    const contexto = result.chartData.find((d) => d.name === 'CONTEXTO')
-    const praxis = result.chartData.find((d) => d.name === 'PRAXIS')
+    const contexto = result.radarData.find((d) => d.subject === 'Contexto')
+    const praxis = result.radarData.find((d) => d.subject === 'Praxis')
     expect(contexto?.score).toBe(50)
     expect(praxis?.score).toBe(100)
+  })
+
+  it('computes per-componente scores correctly', () => {
+    const sessions: SessionRow[] = [{ id: 's1', total_questions: 4 }]
+    const answers: AnswerRow[] = [
+      makeAnswer('s1', true, 'Contexto', 'Pedagógico'),
+      makeAnswer('s1', false, 'Contexto', 'Pedagógico'),
+      makeAnswer('s1', true, 'Praxis', 'Fundamentos'),
+      makeAnswer('s1', true, 'Praxis', 'Fundamentos'),
+    ]
+    const result = computeDashboardMetrics(sessions, answers)
+    const pedagogicas = result.radarData.find((d) => d.subject === 'Pedagógicas')
+    const generales = result.radarData.find((d) => d.subject === 'Generales')
+    expect(pedagogicas?.score).toBe(50)
+    expect(generales?.score).toBe(100)
   })
 
   it('handles sessions with zero total_questions without dividing by zero', () => {

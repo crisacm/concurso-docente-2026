@@ -1,16 +1,8 @@
 import type { AxisTheme, Componente } from '@/types'
 
-const AXIS_COLORS: Record<AxisTheme, string> = {
-  Contexto: '#4B88FF',
-  Planeacion: '#7C3AED',
-  Praxis: '#FF5A79',
-  Ambiente: '#06B6D4',
-}
-
-export interface ChartDataPoint {
-  name: string
+export interface RadarDataPoint {
+  subject: string
   score: number
-  fill: string
 }
 
 export interface SessionRow {
@@ -30,8 +22,14 @@ export interface AnswerRow {
 export interface DashboardMetrics {
   globalScore: number
   record: number
-  chartData: ChartDataPoint[]
+  radarData: RadarDataPoint[]
   scoreBySessionId: Record<string, number>
+}
+
+const COMPONENTE_LABEL: Record<Componente, string> = {
+  Fundamentos: 'Generales',
+  Pedagógico: 'Pedagógicas',
+  Psicotécnico: 'Psicotécnicas',
 }
 
 export function computeDashboardMetrics(
@@ -68,21 +66,44 @@ export function computeDashboardMetrics(
     Ambiente: { correct: 0, total: 0 },
   }
 
+  const componenteMap: Record<Componente, { correct: number; total: number }> = {
+    Fundamentos: { correct: 0, total: 0 },
+    Pedagógico: { correct: 0, total: 0 },
+    Psicotécnico: { correct: 0, total: 0 },
+  }
+
   for (const a of answers) {
     const axis = a.question_bank.metadata?.axis_theme
     if (axis && axis in axisMap) {
       axisMap[axis].total++
       if (a.is_correct) axisMap[axis].correct++
     }
+    const comp = a.question_bank.componente
+    if (comp && comp in componenteMap) {
+      componenteMap[comp].total++
+      if (a.is_correct) componenteMap[comp].correct++
+    }
   }
 
-  const chartData: ChartDataPoint[] = (
-    Object.entries(axisMap) as [AxisTheme, { correct: number; total: number }][]
-  ).map(([axis, { correct, total }]) => ({
-    name: axis.toUpperCase(),
-    score: total > 0 ? Math.round((correct / total) * 100) : 0,
-    fill: AXIS_COLORS[axis],
-  }))
+  const axisScore = (axis: AxisTheme): number => {
+    const { correct, total } = axisMap[axis]
+    return total > 0 ? Math.round((correct / total) * 100) : 0
+  }
 
-  return { globalScore, record, chartData, scoreBySessionId }
+  const componenteScore = (comp: Componente): number => {
+    const { correct, total } = componenteMap[comp]
+    return total > 0 ? Math.round((correct / total) * 100) : 0
+  }
+
+  const radarData: RadarDataPoint[] = [
+    { subject: 'Contexto', score: axisScore('Contexto') },
+    { subject: 'Planeación', score: axisScore('Planeacion') },
+    { subject: 'Praxis', score: axisScore('Praxis') },
+    { subject: 'Ambiente', score: axisScore('Ambiente') },
+    { subject: COMPONENTE_LABEL['Fundamentos'], score: componenteScore('Fundamentos') },
+    { subject: COMPONENTE_LABEL['Pedagógico'], score: componenteScore('Pedagógico') },
+    { subject: COMPONENTE_LABEL['Psicotécnico'], score: componenteScore('Psicotécnico') },
+  ]
+
+  return { globalScore, record, radarData, scoreBySessionId }
 }
