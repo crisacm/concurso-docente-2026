@@ -1,0 +1,35 @@
+[
+  {
+    "topic": "Gestión de Aula",
+    "difficulty": "Intermedio",
+    "componente": "Pedagógico",
+    "case": "Un docente de bachillerato detecta que varios estudiantes muestran desinterés constante durante las clases de ciencias naturales. Al revisar sus trabajos, nota que los temas no conectan con la realidad cotidiana de los estudiantes.",
+    "question": "¿Cuál es la estrategia pedagógica más adecuada para aumentar la motivación y el aprendizaje significativo en este contexto?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Aplicar evaluaciones frecuentes para exigir mayor responsabilidad a los estudiantes."
+      },
+      {
+        "option": "B",
+        "description": "Diseñar actividades que vinculen los contenidos científicos con situaciones del entorno y la vida cotidiana de los estudiantes."
+      },
+      {
+        "option": "C",
+        "description": "Reducir la complejidad de los temas para facilitar la comprensión."
+      },
+      {
+        "option": "D",
+        "description": "Solicitar a los padres de familia que refuercen los contenidos en casa."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El aprendizaje significativo (Ausubel) establece que los nuevos conocimientos deben anclarse a saberes previos y experiencias cercanas al estudiante. Vincular los contenidos con el contexto real favorece la motivación intrínseca y la comprensión profunda, principio fundamental del Decreto 1290 sobre evaluación formativa.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Decreto 1290 de 2009 / Ley 115 Art. 92"
+    }
+  }
+]

@@ -60,7 +60,7 @@ export function SimPageClient({ email, name, avatarUrl }: SimPageClientProps) {
             <Settings2 className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400" />
             <Separator orientation="vertical" className="h-6 bg-slate-300 dark:bg-white/20" />
             <p className="text-[11px] text-slate-600 dark:text-white/70">
-              <span className="font-bold text-violet-600 dark:text-violet-400">3 pasos</span> para
+              <span className="font-bold text-violet-600 dark:text-violet-400">2 pasos</span> para
               configurar tu prueba
             </p>
           </div>

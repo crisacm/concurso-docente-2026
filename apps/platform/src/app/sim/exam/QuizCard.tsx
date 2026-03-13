@@ -1,9 +1,9 @@
 'use client'
 
-import { Question } from './mockQuestions'
+import type { QuestionBank, QuestionOption } from '@/types'
 
 interface QuizCardProps {
-  question: Question
+  question: QuestionBank
   questionIndex: number
   totalQuestions: number
   selectedAnswer: number | undefined
@@ -20,10 +20,11 @@ export function QuizCard({
   onSelectAnswer,
 }: QuizCardProps) {
   const progressPercent = Math.round(((questionIndex + 1) / totalQuestions) * 100)
+  const options = question.options as QuestionOption[]
 
   return (
     <div className="w-full">
-      {/* Progress section — sin fondo */}
+      {/* Progress section */}
       <div className="mb-4">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[12px] font-medium text-slate-500 dark:text-slate-400">
@@ -43,28 +44,29 @@ export function QuizCard({
 
       {/* Question card — glassmorphism */}
       <div className="rounded-2xl border border-white/40 bg-white/60 p-6 shadow-sm backdrop-blur-md dark:border-slate-700/40 dark:bg-slate-800/60">
-        {/* Category chip */}
+        {/* Component chip */}
         <span className="inline-flex items-center rounded-full border border-slate-200/60 bg-slate-100/60 px-3 py-1 text-[12px] font-medium text-slate-600 backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-700/40 dark:text-slate-300">
-          {question.category}
+          {question.componente}
         </span>
+
+        {/* Case / scenario */}
+        {question.case && (
+          <div className="mt-4 rounded-xl border border-blue-200/40 bg-blue-50/50 px-4 py-3 dark:border-blue-800/30 dark:bg-blue-900/15">
+            <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-400">
+              {question.case}
+            </p>
+          </div>
+        )}
 
         {/* Question text */}
         <p className="mt-4 text-[17px] font-semibold leading-snug text-slate-800 dark:text-slate-100">
           {question.question}
         </p>
-
-        {/* Legend / Explanation */}
-        <div className="mt-4 rounded-xl border border-blue-200/40 bg-blue-50/50 px-4 py-3 dark:border-blue-800/30 dark:bg-blue-900/15">
-          <p className="text-[13px] leading-relaxed text-slate-600 dark:text-slate-400">
-            {question.explanation}
-          </p>
-        </div>
-
       </div>
 
       {/* Options — outside the glass card */}
       <div className="mt-4 flex flex-col gap-3">
-        {question.options.map((option, idx) => {
+        {options.map((opt, idx) => {
           const isSelected = selectedAnswer === idx
           const letter = LETTERS[idx]
           return (
@@ -89,7 +91,7 @@ export function QuizCard({
                 {letter}
               </span>
               <span className="flex-1 text-[14px] leading-snug text-slate-700 dark:text-slate-200">
-                {option}
+                {opt.description}
               </span>
             </button>
           )

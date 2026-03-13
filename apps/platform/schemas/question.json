@@ -1,0 +1,23 @@
+[
+    {
+        "topic": "Nombre del tema (ej: Matemáticas)",
+        "difficulty": "Básico | Intermedio | Avanzado",
+        "componente": "Pedagógico | Fundamentos | Psicotécnico",
+        "case": "Descripción del escenario",
+        "question": "Enunciado de la pregunta",
+        "options": [
+            {
+                "option": "A",
+                "description": "Descripción de la opción"
+            }
+        ],
+        "correct_answer": "Letra de la opción correcta",
+        "regularity_explanation": "Explicación técnica",
+        "metadata": {
+            "axis_theme": "Contexto | Planeacion | Praxis | Ambiente",
+            "management": "Directiva | Academica | Administrativa | Comunitaria",
+            "relation": "Saber | Otro | Si_mismo",
+            "main_norm": "Ej: Ley 115 / Decreto 1278"
+        }
+    }
+]

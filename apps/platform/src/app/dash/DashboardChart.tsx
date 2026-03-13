@@ -2,14 +2,17 @@
 
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts'
 
-const data = [
-  { name: 'CONTEXTO',   score: 65, fill: '#4B88FF' },
-  { name: 'PLANEACIÓN', score: 82, fill: '#7C3AED' },
-  { name: 'PRAXIS',     score: 45, fill: '#FF5A79' },
-  { name: 'AMBIENTE',   score: 78, fill: '#06B6D4' },
-]
+export interface ChartDataPoint {
+  name: string
+  score: number
+  fill: string
+}
 
-export function DashboardChart() {
+interface DashboardChartProps {
+  data: ChartDataPoint[]
+}
+
+export function DashboardChart({ data }: DashboardChartProps) {
   return (
     <div className="flex flex-col">
       <div className="h-[180px] w-full">
@@ -40,7 +43,7 @@ export function DashboardChart() {
               style={{ backgroundColor: d.fill }}
             />
             <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              {d.name}
+              {d.name} {d.score}%
             </span>
           </span>
         ))}

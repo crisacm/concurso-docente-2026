@@ -10,16 +10,18 @@ import {
   DialogTitle,
 } from '@/components/ui'
 import { Button } from '@/components/ui'
-import type { QuestionResult } from './mockResult'
+import type { ReviewQuestion } from './page'
 
 interface ReviewModalProps {
   open: boolean
   onClose: () => void
-  questions: QuestionResult[]
+  questions: ReviewQuestion[]
 }
 
+const LETTERS = ['A', 'B', 'C', 'D']
+
 export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
-  const correct = questions.filter((q) => q.selectedIndex === q.correctIndex).length
+  const correct = questions.filter((q) => q.selectedAnswer === q.correctAnswer).length
   const total = questions.length
 
   return (
@@ -37,7 +39,12 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
 
         <div className="flex-1 space-y-4 overflow-y-auto pr-2">
           {questions.map((q, i) => {
-            const isCorrect = q.selectedIndex === q.correctIndex
+            const isCorrect = q.selectedAnswer === q.correctAnswer
+            const selectedIdx = LETTERS.indexOf(q.selectedAnswer)
+            const correctIdx = LETTERS.indexOf(q.correctAnswer)
+            const selectedText = q.options[selectedIdx]?.description ?? q.selectedAnswer
+            const correctText = q.options[correctIdx]?.description ?? q.correctAnswer
+
             return (
               <div
                 key={q.id}
@@ -59,14 +66,14 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
                   ) : (
                     <XCircle className="mt-0.5 h-4 w-4 shrink-0" />
                   )}
-                  <span>Tu respuesta: {q.options[q.selectedIndex]}</span>
+                  <span>Tu respuesta ({q.selectedAnswer}): {selectedText}</span>
                 </div>
 
                 {!isCorrect && (
                   <>
                     <div className="mt-2 flex items-start gap-2 text-[12px] text-emerald-600 dark:text-emerald-400">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span>Correcta: {q.options[q.correctIndex]}</span>
+                      <span>Correcta ({q.correctAnswer}): {correctText}</span>
                     </div>
                     <div className="mt-2 rounded-lg bg-blue-50/80 p-3 text-[12px] text-slate-600 dark:bg-blue-500/10 dark:text-slate-300">
                       {q.explanation}

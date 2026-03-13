@@ -1,0 +1,992 @@
+[
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Pedagógico",
+    "case": "Un docente de primaria observa que varios estudiantes de grado 3° tienen dificultades para comprender la lectura. Al revisar los antecedentes, encuentra que muchos provienen de hogares donde no se practica la lectura y tienen poco acceso a libros.",
+    "question": "¿Cuál es el enfoque más pertinente que debe asumir el docente para abordar esta situación desde el contexto sociocultural?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Implementar un programa de lectura exclusivo dentro del aula sin involucrar a la familia."
+      },
+      {
+        "option": "B",
+        "description": "Diseñar estrategias que vinculen a la familia y al entorno comunitario en la promoción de la lectura."
+      },
+      {
+        "option": "C",
+        "description": "Remitir a los estudiantes al programa de refuerzo académico de la institución."
+      },
+      {
+        "option": "D",
+        "description": "Aumentar la carga de lecturas obligatorias para compensar el déficit."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "La Ley 115 de 1994 y el Decreto 1860 reconocen a la familia como primer agente educador. Involucrar el entorno sociocultural del estudiante en los procesos de aprendizaje lector responde al enfoque ecológico del desarrollo (Bronfenbrenner) y al principio de educación contextualizada.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Comunitaria",
+      "relation": "Otro",
+      "main_norm": "Ley 115 de 1994 / Decreto 1860 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Pedagógico",
+    "case": "En una institución educativa rural de primaria, los estudiantes de grado 5° muestran diferentes ritmos de aprendizaje. El docente cuenta con un solo espacio pedagógico para atender todas las necesidades.",
+    "question": "¿Qué estrategia resulta más adecuada para atender la diversidad de ritmos de aprendizaje en un aula multigrado rural?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Agrupar a los estudiantes por nivel de desempeño y asignar actividades diferenciadas a cada grupo."
+      },
+      {
+        "option": "B",
+        "description": "Aplicar el mismo plan de clase a todos los estudiantes para garantizar la igualdad."
+      },
+      {
+        "option": "C",
+        "description": "Solicitar a los estudiantes avanzados que repitan los contenidos hasta que todos alcancen el mismo nivel."
+      },
+      {
+        "option": "D",
+        "description": "Reducir los objetivos de aprendizaje a los mínimos para que todos puedan alcanzarlos."
+      }
+    ],
+    "correct_answer": "A",
+    "regularity_explanation": "El Decreto 1075 de 2015 reconoce la pedagogía flexible para zonas rurales y multigrado. La atención diferenciada respeta los ritmos individuales de aprendizaje, principio fundamental del Decreto 1290 sobre evaluación formativa.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Decreto 1075 de 2015 / Decreto 1290 de 2009"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Pedagógico",
+    "case": "Un docente nuevo en una institución de primaria nota que sus colegas aplican métodos tradicionales de enseñanza. Los padres de familia muestran resistencia ante propuestas innovadoras y prefieren la enseñanza memorística.",
+    "question": "¿Cómo debe el docente gestionar esta tensión entre innovación pedagógica y resistencia de la comunidad?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Adaptar completamente su práctica al modelo tradicional para evitar conflictos con la comunidad."
+      },
+      {
+        "option": "B",
+        "description": "Implementar cambios radicales de inmediato argumentando que son pedagógicamente superiores."
+      },
+      {
+        "option": "C",
+        "description": "Dialogar con la comunidad, explicar los fundamentos de las nuevas estrategias y mostrar gradualmente sus beneficios."
+      },
+      {
+        "option": "D",
+        "description": "Ignorar las preferencias de la comunidad porque el docente es el experto en pedagogía."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "La Ley 115 en su artículo 6° establece la participación de la comunidad como principio rector. Un proceso de transformación pedagógica requiere construcción colectiva, respeto por los saberes culturales y comunicación asertiva con todos los actores del proceso educativo.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Comunitaria",
+      "relation": "Otro",
+      "main_norm": "Ley 115 de 1994 Art. 6"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Pedagógico",
+    "case": "Un docente de grado 2° debe planear una unidad didáctica sobre sumas y restas. Dispone de 4 semanas y 3 horas semanales de matemáticas.",
+    "question": "¿Cuál es el primer elemento que debe establecer al planear esta unidad didáctica?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Los materiales didácticos y recursos tecnológicos a utilizar."
+      },
+      {
+        "option": "B",
+        "description": "Los estándares básicos de competencias y los aprendizajes esperados para el grado."
+      },
+      {
+        "option": "C",
+        "description": "Las actividades de evaluación sumativa para el final de la unidad."
+      },
+      {
+        "option": "D",
+        "description": "El libro de texto que seguirán durante las cuatro semanas."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Según los Lineamientos Curriculares del MEN y los Estándares Básicos de Competencias, la planeación curricular debe partir de los aprendizajes esperados y los estándares de grado, que orientan todo el proceso de enseñanza-aprendizaje y evaluación.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Estándares Básicos de Competencias MEN 2006"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Pedagógico",
+    "case": "Un docente de ciencias naturales en primaria planea una clase sobre el ciclo del agua. Quiere asegurarse de que los estudiantes conecten los nuevos conceptos con lo que ya saben.",
+    "question": "¿Qué estrategia de planeación favorece la activación de conocimientos previos al iniciar la clase?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Iniciar directamente con la explicación del ciclo del agua usando el libro de texto."
+      },
+      {
+        "option": "B",
+        "description": "Pedir a los estudiantes que memoricen los pasos del ciclo del agua antes de la clase."
+      },
+      {
+        "option": "C",
+        "description": "Diseñar una actividad de indagación inicial con pregunta generadora que explore qué saben los estudiantes sobre el agua."
+      },
+      {
+        "option": "D",
+        "description": "Proyectar un video explicativo del ciclo del agua sin actividad previa."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "El aprendizaje significativo (Ausubel) y los Lineamientos Curriculares del MEN señalan que la activación de conocimientos previos es fundamental para construir nuevos aprendizajes. Una actividad de indagación inicial permite al docente diagnosticar y establecer puentes cognitivos.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Lineamientos Curriculares MEN / Ley 115 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Pedagógico",
+    "case": "Una docente de lengua castellana en grado 4° quiere planear actividades que desarrollen la competencia comunicativa. Tiene estudiantes con diferentes estilos de aprendizaje: visual, auditivo y kinestésico.",
+    "question": "¿Cómo debe diseñar la secuencia didáctica para atender los diferentes estilos de aprendizaje?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Priorizar únicamente las actividades visuales porque son más efectivas para toda la clase."
+      },
+      {
+        "option": "B",
+        "description": "Planear actividades secuenciadas que integren diversas modalidades: lectura de textos, discusión oral y producción escrita o representación."
+      },
+      {
+        "option": "C",
+        "description": "Separar a los estudiantes en grupos según su estilo de aprendizaje y darles actividades exclusivas para cada grupo."
+      },
+      {
+        "option": "D",
+        "description": "Dejar que cada estudiante elija libremente las actividades que más le gusten."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Los Estándares Básicos de Competencias en Lenguaje y las teorías de inteligencias múltiples (Gardner) sugieren diseñar experiencias diversas que atiendan distintas modalidades de aprendizaje, favoreciendo la competencia comunicativa en sus dimensiones receptiva y productiva.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Estándares Básicos de Competencias en Lenguaje MEN"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Pedagógico",
+    "case": "Durante una clase de matemáticas en grado 3°, un docente nota que la mayoría de estudiantes comete el mismo error al resolver restas con reagrupación. La clase lleva 20 minutos de actividad independiente.",
+    "question": "¿Cuál es la acción más pertinente para el docente en ese momento?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Continuar con la clase y revisar los errores en la siguiente sesión."
+      },
+      {
+        "option": "B",
+        "description": "Detener la actividad, identificar el patrón de error colectivo y realizar una retroalimentación formativa inmediata."
+      },
+      {
+        "option": "C",
+        "description": "Asignar más ejercicios de práctica para que los estudiantes corrijan el error por ensayo y error."
+      },
+      {
+        "option": "D",
+        "description": "Enviar los ejercicios como tarea con la indicación de preguntar a los padres."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El Decreto 1290 de 2009 establece la evaluación formativa como proceso continuo que retroalimenta el aprendizaje en tiempo real. Identificar errores frecuentes y brindar retroalimentación inmediata es la práctica pedagógica más efectiva para corregir concepciones erróneas.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Decreto 1290 de 2009"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Pedagógico",
+    "case": "Un docente implementa trabajo colaborativo en grupos en su clase de ciencias sociales. Observa que en uno de los grupos, un estudiante hace todo el trabajo mientras los demás no participan.",
+    "question": "¿Qué debe hacer el docente para garantizar la participación equitativa dentro del grupo?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Disolver el grupo y asignar trabajo individual a todos los estudiantes."
+      },
+      {
+        "option": "B",
+        "description": "Llamar la atención al grupo frente a toda la clase para que participen más."
+      },
+      {
+        "option": "C",
+        "description": "Asignar roles específicos y responsabilidades claras a cada miembro del grupo con criterios de evaluación individuales."
+      },
+      {
+        "option": "D",
+        "description": "Dejar que el grupo resuelva su dinámica interna sin intervención docente."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "El aprendizaje cooperativo (Johnson & Johnson) requiere interdependencia positiva y responsabilidad individual. Asignar roles claros con criterios de evaluación individual garantiza que todos los estudiantes tengan responsabilidades específicas y aporten al logro del grupo.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Otro",
+      "main_norm": "Ley 115 de 1994 Art. 92 / Decreto 1290 de 2009"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Pedagógico",
+    "case": "Un docente de primaria quiere transformar el ambiente de aprendizaje del aula para promover la autonomía y la exploración. El espacio actual cuenta con sillas en filas y todos los materiales guardados en un estante cerrado.",
+    "question": "¿Qué cambio en el ambiente físico tendría mayor impacto en el aprendizaje autónomo de los estudiantes?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Cambiar el color de las paredes del aula para hacer el espacio más atractivo."
+      },
+      {
+        "option": "B",
+        "description": "Organizar el espacio en rincones de trabajo accesibles con materiales disponibles para que los estudiantes exploren libremente."
+      },
+      {
+        "option": "C",
+        "description": "Instalar pantallas digitales en el frente del aula para presentar contenidos multimedia."
+      },
+      {
+        "option": "D",
+        "description": "Aumentar la iluminación natural del aula abriendo más ventanas."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Los ambientes de aprendizaje activos (Reggio Emilia, Montessori) y los Lineamientos Pedagógicos del MEN reconocen que el espacio físico es el tercer maestro. Organizar rincones de trabajo accesibles fomenta la exploración, la autonomía y el aprendizaje por descubrimiento.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Lineamientos Pedagógicos MEN / Ley 115 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Pedagógico",
+    "case": "En una institución educativa de primaria, el clima escolar se ve afectado por conflictos frecuentes entre estudiantes durante los recreos. Los docentes reportan que estos conflictos impactan negativamente en la disposición para aprender.",
+    "question": "¿Qué estrategia institucional contribuye más efectivamente a mejorar el clima escolar?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Prohibir el juego libre durante los recreos y supervisar estrictamente a los estudiantes."
+      },
+      {
+        "option": "B",
+        "description": "Aplicar sanciones disciplinarias severas a los estudiantes que generan conflictos."
+      },
+      {
+        "option": "C",
+        "description": "Implementar un programa de convivencia con formación en resolución de conflictos y mediación entre pares."
+      },
+      {
+        "option": "D",
+        "description": "Reducir el tiempo de recreo para disminuir las oportunidades de conflicto."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "La Ley 1620 de 2013 y el Decreto 1965 establecen la obligatoriedad del Sistema Nacional de Convivencia Escolar. Los programas de resolución pacífica de conflictos y mediación entre pares son estrategias reconocidas para mejorar el clima escolar y los resultados académicos.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Directiva",
+      "relation": "Otro",
+      "main_norm": "Ley 1620 de 2013 / Decreto 1965 de 2013"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Fundamentos",
+    "case": "Un rector de primaria recibe los resultados de las Pruebas Saber 3° y 5° y observa que su institución tiene bajo desempeño en matemáticas en comparación con el promedio municipal.",
+    "question": "¿Cuál es el primer paso institucional que debe seguir el rector al analizar estos resultados?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Implementar inmediatamente una estrategia de refuerzo en matemáticas para todos los estudiantes."
+      },
+      {
+        "option": "B",
+        "description": "Contrastar los resultados con el contexto socioeconómico y las características de la población para identificar factores asociados."
+      },
+      {
+        "option": "C",
+        "description": "Solicitar al MEN recursos adicionales para mejorar la infraestructura tecnológica."
+      },
+      {
+        "option": "D",
+        "description": "Cambiar los docentes de matemáticas por nuevos profesionales con mayor experiencia."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El Índice Sintético de Calidad Educativa (ISCE) y el Marco de la Política Educativa establecen que el análisis de resultados debe considerar el contexto institucional y los factores asociados al desempeño antes de definir estrategias de mejoramiento, según la Guía 34 del MEN.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Directiva",
+      "relation": "Saber",
+      "main_norm": "Guía 34 MEN / Ley 115 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Fundamentos",
+    "case": "Un docente de primaria trabaja en una zona con alto índice de vulnerabilidad social. Varios estudiantes llegan al colegio sin haber desayunado y muestran dificultades de concentración durante las primeras horas.",
+    "question": "¿Qué articulación institucional resulta más pertinente para atender esta situación desde el enfoque de derechos?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Pedir a los padres de familia que garanticen el desayuno de los estudiantes antes de venir al colegio."
+      },
+      {
+        "option": "B",
+        "description": "Articular con el ICBF y gestionar ante la Secretaría de Educación la activación del Programa de Alimentación Escolar (PAE)."
+      },
+      {
+        "option": "C",
+        "description": "Iniciar las clases después de la segunda hora para que los estudiantes lleguen desayunados."
+      },
+      {
+        "option": "D",
+        "description": "Diseñar actividades de menor exigencia cognitiva durante las primeras horas del día."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El Programa de Alimentación Escolar (PAE), regulado por el Decreto 1852 de 2015, es un derecho de los estudiantes en condición de vulnerabilidad. La Ley 1098 (Código de Infancia) establece la articulación interinstitucional como obligación del Estado para garantizar el derecho a la educación integral.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Administrativa",
+      "relation": "Otro",
+      "main_norm": "Decreto 1852 de 2015 / Ley 1098 de 2006"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Fundamentos",
+    "case": "La institución educativa debe elaborar su Proyecto Educativo Institucional (PEI). El nuevo rector quiere garantizar que el proceso sea participativo e inclusivo.",
+    "question": "Según la Ley 115, ¿quiénes deben participar en la construcción del PEI?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Exclusivamente los directivos docentes y el consejo académico."
+      },
+      {
+        "option": "B",
+        "description": "Solo los docentes y el rector de la institución."
+      },
+      {
+        "option": "C",
+        "description": "Toda la comunidad educativa: directivos, docentes, estudiantes, padres de familia y sector productivo."
+      },
+      {
+        "option": "D",
+        "description": "El rector y un representante del MEN designado para tal fin."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "El artículo 14 del Decreto 1860 de 1994 y el artículo 73 de la Ley 115 establecen que el PEI debe ser elaborado con la participación de toda la comunidad educativa. El Consejo Directivo, que incluye representantes de todos los estamentos, es responsable de su aprobación.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Directiva",
+      "relation": "Otro",
+      "main_norm": "Ley 115 de 1994 Art. 73 / Decreto 1860 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Fundamentos",
+    "case": "Una institución educativa de primaria quiere actualizar su currículo para incluir competencias del siglo XXI. El consejo académico debe orientar el proceso.",
+    "question": "¿Cuál es el marco normativo que orienta la organización del currículo en la educación básica primaria colombiana?",
+    "options": [
+      {
+        "option": "A",
+        "description": "El Plan Nacional de Desarrollo y los acuerdos municipales de educación."
+      },
+      {
+        "option": "B",
+        "description": "Los Estándares Básicos de Competencias, los Derechos Básicos de Aprendizaje y los Lineamientos Curriculares del MEN."
+      },
+      {
+        "option": "C",
+        "description": "Los textos escolares adoptados por la institución y los programas de editoriales certificadas."
+      },
+      {
+        "option": "D",
+        "description": "Únicamente los acuerdos internacionales de la UNESCO sobre competencias del siglo XXI."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "La Ley 115 de 1994 y el Decreto 1860 establecen que el currículo debe fundamentarse en los Lineamientos Curriculares del MEN. Los Estándares Básicos de Competencias (2006) y los Derechos Básicos de Aprendizaje (DBA) son los referentes nacionales que orientan la planeación curricular.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Ley 115 de 1994 / DBA MEN"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Fundamentos",
+    "case": "El consejo académico de una institución de primaria debe revisar el Sistema Institucional de Evaluación de Estudiantes (SIEE). El documento actual tiene solo criterios de evaluación sumativa.",
+    "question": "¿Qué elementos adicionales debe incluir el SIEE según el Decreto 1290 de 2009?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Únicamente los criterios de reprobación y promoción de grado."
+      },
+      {
+        "option": "B",
+        "description": "Criterios de evaluación, estrategias de valoración del desempeño, actividades de apoyo y superación, y procesos de autoevaluación estudiantil."
+      },
+      {
+        "option": "C",
+        "description": "La escala de calificación numérica del 1 al 5 y los porcentajes por período."
+      },
+      {
+        "option": "D",
+        "description": "Solo los indicadores de logro por área y las fechas de entrega de informes a padres."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El Decreto 1290 de 2009 establece que el SIEE debe incluir: criterios de evaluación y promoción, la escala de valoración institucional, las estrategias de valoración integral, las acciones de seguimiento para el mejoramiento y los procesos de autoevaluación de los estudiantes.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Decreto 1290 de 2009"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Fundamentos",
+    "case": "Una docente de grado 1° planea actividades para desarrollar habilidades en lecto-escritura inicial. Quiere asegurarse de que su planeación esté alineada con los DBA vigentes.",
+    "question": "¿Qué establece el DBA más relevante para la iniciación lectora en grado 1°?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Que los estudiantes memoricen el alfabeto completo y realicen planas de escritura."
+      },
+      {
+        "option": "B",
+        "description": "Que los estudiantes comprendan que el sistema escrito representa el lenguaje oral y puedan interpretar y producir textos sencillos con intención comunicativa."
+      },
+      {
+        "option": "C",
+        "description": "Que los estudiantes lean textos de al menos dos páginas con comprensión literal."
+      },
+      {
+        "option": "D",
+        "description": "Que los estudiantes reconozcan únicamente vocales y consonantes de uso más frecuente."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Los Derechos Básicos de Aprendizaje (DBA) de Lenguaje para grado 1° del MEN establecen el enfoque comunicativo de la lecto-escritura: los estudiantes deben comprender la función comunicativa del lenguaje escrito y producir textos con propósito real, superando el modelo de enseñanza mecánica.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "DBA Lenguaje Grado 1° MEN"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Fundamentos",
+    "case": "Un docente de educación física en primaria observa que un estudiante presenta dificultades motrices significativas en comparación con sus pares. El estudiante evita participar en actividades físicas y muestra frustración.",
+    "question": "¿Cuál es la actuación docente más adecuada desde el enfoque inclusivo?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Excluir al estudiante de las actividades físicas para evitar situaciones de frustración."
+      },
+      {
+        "option": "B",
+        "description": "Referir inmediatamente al estudiante al especialista y esperar su diagnóstico para actuar."
+      },
+      {
+        "option": "C",
+        "description": "Adaptar las actividades físicas según las capacidades del estudiante, consultar con el orientador y documentar las observaciones para el proceso de inclusión."
+      },
+      {
+        "option": "D",
+        "description": "Realizar las mismas actividades sin modificaciones para no generar diferencias entre los estudiantes."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "El Decreto 1421 de 2017 sobre educación inclusiva establece que los docentes deben realizar ajustes razonables para garantizar la participación de todos los estudiantes. La adaptación de actividades, el trabajo en equipo con el orientador y la documentación son prácticas del Diseño Universal para el Aprendizaje (DUA).",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Otro",
+      "main_norm": "Decreto 1421 de 2017"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Fundamentos",
+    "case": "En una institución de primaria, el consejo de padres solicita mayor información sobre el proceso de evaluación de sus hijos. El rector debe definir cómo responder a esta solicitud.",
+    "question": "¿Qué mecanismo establece la normativa para garantizar la participación de los padres en el proceso evaluativo?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Los padres no tienen derecho a participar en el proceso evaluativo, que es competencia exclusiva del docente."
+      },
+      {
+        "option": "B",
+        "description": "Entregar informes escritos al final de cada año escolar con la calificación definitiva."
+      },
+      {
+        "option": "C",
+        "description": "Garantizar espacios periódicos de entrega de informes, derecho a la retroalimentación del desempeño y participación en el proceso de evaluación según el SIEE institucional."
+      },
+      {
+        "option": "D",
+        "description": "Permitir que los padres asistan a las clases para observar el desempeño de sus hijos."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "El Decreto 1290 de 2009 establece los derechos y deberes de los estudiantes y sus padres en el proceso evaluativo, incluyendo la entrega periódica de informes y la retroalimentación del desempeño. La Ley 115 reconoce a la familia como primer agente educativo.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Comunitaria",
+      "relation": "Otro",
+      "main_norm": "Decreto 1290 de 2009 / Ley 115 de 1994"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Fundamentos",
+    "case": "El rector de una institución educativa de primaria quiere crear un ambiente institucional que promueva la innovación pedagógica entre los docentes.",
+    "question": "¿Qué estrategia institucional favorece más efectivamente una cultura de innovación pedagógica?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Exigir a todos los docentes adoptar un único modelo pedagógico innovador definido por la dirección."
+      },
+      {
+        "option": "B",
+        "description": "Crear comunidades de práctica docente donde se compartan experiencias, se reflexione sobre la práctica y se diseñen estrategias colaborativamente."
+      },
+      {
+        "option": "C",
+        "description": "Contratar asesores externos que capaciten a los docentes en nuevas metodologías dos veces al año."
+      },
+      {
+        "option": "D",
+        "description": "Evaluar y sancionar a los docentes que no innoven en sus prácticas pedagógicas."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Las comunidades de práctica (Wenger) y el desarrollo profesional docente situado (MEN, Programa Todos a Aprender) son reconocidos como las estrategias más efectivas para promover innovación pedagógica sostenida. El Decreto 1278 reconoce el desarrollo profesional colaborativo como derecho y deber docente.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Directiva",
+      "relation": "Otro",
+      "main_norm": "Decreto 1278 de 2002 / Resolución 15683 de 2016"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Fundamentos",
+    "case": "Una institución educativa de básica primaria presenta problemas de deserción escolar, especialmente en zonas rurales. El rector analiza los factores que inciden en este fenómeno.",
+    "question": "¿Qué estrategia institucional articula mejor la permanencia escolar con la pertinencia curricular en contextos rurales?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Reducir los contenidos curriculares para disminuir la carga académica de los estudiantes."
+      },
+      {
+        "option": "B",
+        "description": "Implementar un modelo de educación flexible que adapte los horarios y contenidos al calendario productivo y las necesidades de la comunidad."
+      },
+      {
+        "option": "C",
+        "description": "Ofrecer incentivos económicos a las familias para que mantengan a sus hijos en la escuela."
+      },
+      {
+        "option": "D",
+        "description": "Aumentar la jornada escolar para aprovechar mejor el tiempo disponible."
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "El Decreto 1075 de 2015 y los modelos educativos flexibles del MEN (Escuela Nueva, SAT, Aceleración del Aprendizaje) reconocen que la pertinencia curricular y la flexibilidad son factores protectores de la permanencia, especialmente en contextos rurales y vulnerables.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Directiva",
+      "relation": "Otro",
+      "main_norm": "Decreto 1075 de 2015 / Modelos Educativos Flexibles MEN"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Psicotécnico",
+    "case": "Se presenta la siguiente serie numérica: 2, 6, 12, 20, 30, __",
+    "question": "¿Cuál es el siguiente número en la serie?",
+    "options": [
+      {
+        "option": "A",
+        "description": "40"
+      },
+      {
+        "option": "B",
+        "description": "42"
+      },
+      {
+        "option": "C",
+        "description": "38"
+      },
+      {
+        "option": "D",
+        "description": "44"
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Las diferencias entre términos consecutivos son: 4, 6, 8, 10. La diferencia aumenta en 2 cada vez, por lo que la siguiente diferencia es 12. Entonces 30 + 12 = 42.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Lógico-Matemático"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Psicotécnico",
+    "case": "Se presenta la siguiente serie de letras: A, C, F, J, O, __. (A=1, C=3, F=6, J=10, O=15 en el alfabeto).",
+    "question": "¿Cuál es la letra que continúa la serie?",
+    "options": [
+      {
+        "option": "A",
+        "description": "S"
+      },
+      {
+        "option": "B",
+        "description": "T"
+      },
+      {
+        "option": "C",
+        "description": "U"
+      },
+      {
+        "option": "D",
+        "description": "V"
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "Las posiciones en el alfabeto son 1, 3, 6, 10, 15. Las diferencias son 2, 3, 4, 5; cada diferencia aumenta en 1. La siguiente diferencia es 6, así: 15 + 6 = 21, que corresponde a la letra U.",
+    "metadata": {
+      "axis_theme": "Contexto",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Abstracto"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Psicotécnico",
+    "case": "Un docente tiene que calificar exámenes de 30 estudiantes. Si califica 6 exámenes por hora, necesita calcular cuánto tiempo le tomará terminar.",
+    "question": "¿Cuántas horas necesita el docente para calificar todos los exámenes?",
+    "options": [
+      {
+        "option": "A",
+        "description": "4 horas"
+      },
+      {
+        "option": "B",
+        "description": "5 horas"
+      },
+      {
+        "option": "C",
+        "description": "6 horas"
+      },
+      {
+        "option": "D",
+        "description": "3 horas"
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "30 exámenes ÷ 6 exámenes por hora = 5 horas. Es una operación de división directa.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Administrativa",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Numérico"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Psicotécnico",
+    "case": "En un salón de clases hay 24 estudiantes. La mitad son niñas. De los niños, un tercio juega fútbol.",
+    "question": "¿Cuántos niños del salón juegan fútbol?",
+    "options": [
+      {
+        "option": "A",
+        "description": "4"
+      },
+      {
+        "option": "B",
+        "description": "6"
+      },
+      {
+        "option": "C",
+        "description": "8"
+      },
+      {
+        "option": "D",
+        "description": "3"
+      }
+    ],
+    "correct_answer": "A",
+    "regularity_explanation": "La mitad de 24 = 12 niñas, por lo tanto hay 12 niños. Un tercio de 12 niños = 4 niños juegan fútbol.",
+    "metadata": {
+      "axis_theme": "Planeacion",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Numérico"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Psicotécnico",
+    "case": "Se presenta la siguiente analogía: GATO es a FELINO como PERRO es a __.",
+    "question": "Complete la analogía: GATO es a FELINO como PERRO es a:",
+    "options": [
+      {
+        "option": "A",
+        "description": "Mascota"
+      },
+      {
+        "option": "B",
+        "description": "Animal"
+      },
+      {
+        "option": "C",
+        "description": "Cánido"
+      },
+      {
+        "option": "D",
+        "description": "Doméstico"
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "GATO es la especie y FELINO es el grupo taxonómico al que pertenece. Aplicando la misma relación: PERRO es la especie y CÁNIDO es el grupo taxonómico al que pertenece. La relación es especie→familia/orden.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Verbal / Analogías"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Psicotécnico",
+    "case": "Se plantea el siguiente razonamiento lógico: 'Todos los docentes son profesionales. Algunos profesionales son artistas.'",
+    "question": "De las siguientes afirmaciones, ¿cuál se puede concluir necesariamente?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Todos los docentes son artistas."
+      },
+      {
+        "option": "B",
+        "description": "Ningún docente es artista."
+      },
+      {
+        "option": "C",
+        "description": "Algunos docentes pueden ser artistas."
+      },
+      {
+        "option": "D",
+        "description": "Todos los artistas son docentes."
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "Del silogismo: todos los docentes son profesionales y algunos profesionales son artistas. No se puede concluir que todos ni que ningún docente es artista. La única conclusión válida es que existe la posibilidad de que algunos docentes sean artistas, según las leyes de la lógica proposicional.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Directiva",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Lógico Deductivo"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Psicotécnico",
+    "case": "En una secuencia de figuras, un triángulo rota 90° en sentido horario en cada paso y cambia de color según el ciclo: blanco → gris → negro → blanco. En el paso 1 el triángulo apunta hacia arriba y es blanco.",
+    "question": "En el paso 4, ¿cuál es la orientación y el color del triángulo?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Apunta hacia la izquierda y es blanco."
+      },
+      {
+        "option": "B",
+        "description": "Apunta hacia la derecha y es negro."
+      },
+      {
+        "option": "C",
+        "description": "Apunta hacia abajo y es negro."
+      },
+      {
+        "option": "D",
+        "description": "Apunta hacia arriba y es gris."
+      }
+    ],
+    "correct_answer": "A",
+    "regularity_explanation": "Rotando 90° en sentido horario: Paso 1: arriba (blanco) → Paso 2: derecha (gris) → Paso 3: abajo (negro) → Paso 4: izquierda (blanco, el ciclo de colores reinicia). La respuesta correcta es: apunta hacia la izquierda y es blanco.",
+    "metadata": {
+      "axis_theme": "Praxis",
+      "management": "Academica",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Espacial / Abstracto"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Avanzado",
+    "component": "Psicotécnico",
+    "case": "Un rector asigna cuatro tareas (A, B, C, D) con las siguientes restricciones: A solo puede hacerse después de B; C debe hacerse antes que A; D debe hacerse después de C pero antes de A.",
+    "question": "¿Cuál es el orden correcto de realización de las tareas?",
+    "options": [
+      {
+        "option": "A",
+        "description": "B, C, D, A"
+      },
+      {
+        "option": "B",
+        "description": "C, B, D, A"
+      },
+      {
+        "option": "C",
+        "description": "A, B, C, D"
+      },
+      {
+        "option": "D",
+        "description": "B, A, C, D"
+      }
+    ],
+    "correct_answer": "A",
+    "regularity_explanation": "Restricciones: A después de B; C antes de A; D después de C y antes de A. El único orden que cumple todas las restricciones es B, C, D, A: B primero (sin restricciones), luego C (antes de A y D), luego D (después de C, antes de A), finalmente A (después de B, C y D).",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Directiva",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Lógico / Ordenamiento"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Intermedio",
+    "component": "Psicotécnico",
+    "case": "En una evaluación de 5 competencias (escala 1-10), cuatro docentes obtuvieron los siguientes puntajes. Docente 1: 8,7,9,6,8. Docente 2: 7,8,7,9,7. Docente 3: 9,6,8,7,10. Docente 4: 8,9,7,8,6.",
+    "question": "¿Qué docente obtuvo el promedio más alto en la evaluación?",
+    "options": [
+      {
+        "option": "A",
+        "description": "Docente 1"
+      },
+      {
+        "option": "B",
+        "description": "Docente 2"
+      },
+      {
+        "option": "C",
+        "description": "Docente 3"
+      },
+      {
+        "option": "D",
+        "description": "Docente 4"
+      }
+    ],
+    "correct_answer": "C",
+    "regularity_explanation": "Sumas totales: Docente 1: 38, Docente 2: 38, Docente 3: 40, Docente 4: 38. El Docente 3 tiene la suma más alta (40/5 = 8.0 de promedio), superior al 7.6 de los demás.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Administrativa",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Numérico / Estadística Básica"
+    }
+  },
+  {
+    "topic": "Primaria",
+    "difficulty": "Básico",
+    "component": "Psicotécnico",
+    "case": "Una institución educativa quiere distribuir 120 libros de texto entre 4 grados de primaria. Al grado 1° le corresponde el doble que al grado 4°. Al grado 2° le corresponde lo mismo que al grado 4°. Al grado 3° le corresponde la mitad que al grado 1°.",
+    "question": "¿Cuántos libros corresponden al grado 1°?",
+    "options": [
+      {
+        "option": "A",
+        "description": "40"
+      },
+      {
+        "option": "B",
+        "description": "48"
+      },
+      {
+        "option": "C",
+        "description": "36"
+      },
+      {
+        "option": "D",
+        "description": "30"
+      }
+    ],
+    "correct_answer": "B",
+    "regularity_explanation": "Sea x = libros para grado 4°. Grado 1° = 2x, Grado 2° = x, Grado 3° = x (mitad de 2x), Grado 4° = x. Total: 2x + x + x + x = 5x = 120, por tanto x = 24. Grado 1° = 2 × 24 = 48 libros.",
+    "metadata": {
+      "axis_theme": "Ambiente",
+      "management": "Administrativa",
+      "relation": "Saber",
+      "main_norm": "Razonamiento Numérico / Proporcionalidad"
+    }
+  }
+]
