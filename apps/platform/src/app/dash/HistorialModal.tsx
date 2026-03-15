@@ -298,7 +298,7 @@ export function HistorialModal({ userId, triggerLabel }: { userId: string; trigg
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="text-[10px] cursor-pointer font-bold tracking-wider uppercase text-black/60 hover:text-primary/90 transition-colors duration-200">
+        <button className="text-[10px] cursor-pointer font-bold tracking-wider uppercase text-foreground/60 hover:text-primary/90 transition-colors duration-200">
           {triggerLabel ?? 'Ver Todo'}
         </button>
       </DialogTrigger>

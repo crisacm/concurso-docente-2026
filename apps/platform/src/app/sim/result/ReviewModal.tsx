@@ -36,7 +36,7 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>{total} preguntas</span>
               <span>·</span>
-              <span className="font-semibold text-accent-foreground">{correct} correctas</span>
+              <span className="font-semibold text-accent-foreground dark:text-accent">{correct} correctas</span>
               {total - correct > 0 && (
                 <>
                   <span>·</span>
@@ -68,7 +68,7 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
                 <div
                   className={`mt-3 flex items-start gap-2 text-[12px] ${
                     isCorrect
-                      ? 'text-accent-foreground'
+                      ? 'text-accent-foreground dark:text-accent'
                       : 'text-destructive'
                   }`}
                 >
@@ -82,7 +82,7 @@ export function ReviewModal({ open, onClose, questions }: ReviewModalProps) {
 
                 {!isCorrect && (
                   <>
-                    <div className="mt-2 flex items-start gap-2 text-[12px] text-accent-foreground">
+                    <div className="mt-2 flex items-start gap-2 text-[12px] text-accent-foreground dark:text-accent">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>Correcta ({q.correctAnswer}): {correctText}</span>
                     </div>
