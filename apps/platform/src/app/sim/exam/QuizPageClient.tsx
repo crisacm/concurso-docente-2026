@@ -49,7 +49,7 @@ export function computeDistribution(total: number): [number, number, number] {
 }
 
 const AXIS_THEMES: AxisTheme[] = ['Contexto', 'Planeacion', 'Praxis', 'Ambiente']
-const TIMER_SECONDS: Record<number, number> = { 30: 2400, 50: 3600, 100: 7200 }
+const TIMER_SECONDS: Record<number, number> = { 10: 300, 30: 2400, 50: 3600, 100: 7200 }
 
 export function QuizPageClient({
   userId,
@@ -69,6 +69,8 @@ export function QuizPageClient({
   const [showFinalizeDialog, setShowFinalizeDialog] = useState(false)
   const [questions, setQuestions] = useState<QuestionBank[]>([])
   const [sessionId, setSessionId] = useState<string | null>(null)
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveFailedForQuestion, setSaveFailedForQuestion] = useState<number | null>(null)
 
   // Ref guard: prevent double-init (React StrictMode / re-mount)
   const initCalledRef = useRef(false)
@@ -82,9 +84,9 @@ export function QuizPageClient({
 
   // ─── Save single answer to DB ────────────────────────────────────────────────
   const saveAnswer = useCallback(
-    async (questionIdx: number, optionIdx: number, sid: string, qs: QuestionBank[]) => {
+    async (questionIdx: number, optionIdx: number, sid: string, qs: QuestionBank[]): Promise<boolean> => {
       const question = qs[questionIdx]
-      if (!question) return
+      if (!question) return false
       const selectedLetter = LETTERS[optionIdx] ?? ''
       const isCorrect = selectedLetter === question.correct_answer
 
@@ -100,7 +102,9 @@ export function QuizPageClient({
       if (error) {
         if (process.env.NODE_ENV === 'development') console.error('[saveAnswer]', error)
         toast.error('No se pudo guardar la respuesta. Verifica tu conexión.')
+        return false
       }
+      return true
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -265,16 +269,29 @@ export function QuizPageClient({
 
   // ─── Handlers ─────────────────────────────────────────────────────────────────
 
-  const handleSelectAnswer = (optionIdx: number) => {
+  const handleSelectAnswer = async (optionIdx: number) => {
     setSelectedAnswers((prev) => ({ ...prev, [currentQuestion]: optionIdx }))
-    if (sessionId) {
-      saveAnswer(currentQuestion, optionIdx, sessionId, questions)
-    }
+    setSaveFailedForQuestion(null)
+    if (!sessionId) return
+    setIsSaving(true)
+    const ok = await saveAnswer(currentQuestion, optionIdx, sessionId, questions)
+    setIsSaving(false)
+    if (!ok) setSaveFailedForQuestion(currentQuestion)
   }
 
   const handleBack = () => setCurrentQuestion((q) => Math.max(0, q - 1))
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    if (saveFailedForQuestion === currentQuestion) {
+      const ans = selectedAnswers[currentQuestion]
+      if (ans !== undefined && sessionId) {
+        setIsSaving(true)
+        const ok = await saveAnswer(currentQuestion, ans, sessionId, questions)
+        setIsSaving(false)
+        if (!ok) return
+        setSaveFailedForQuestion(null)
+      }
+    }
     if (isLastQuestion) {
       setShowFinalizeDialog(true)
     } else {
@@ -331,7 +348,7 @@ export function QuizPageClient({
 
   if (error) {
     return (
-      <main className="mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
+      <main className="relative z-10 mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
         <p className="text-[16px] font-bold text-destructive">{error}</p>
         <Button className="mt-6" onClick={() => router.push('/sim/setup')}>
           Volver a la configuración
@@ -345,7 +362,7 @@ export function QuizPageClient({
       <QuizTopbar timeLeft={timeLeft} onCancelClick={() => setShowCancelDialog(true)} />
 
       {loading ? (
-        <main className="mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
+        <main className="relative z-10 mx-auto flex max-w-[800px] flex-col items-center px-4 pt-32 text-center sm:px-6">
           <h1 className="text-[24px] text-foreground">
             Cargando tu Simulacro...
           </h1>
@@ -375,6 +392,7 @@ export function QuizPageClient({
           canGoBack={currentQuestion > 0}
           canGoNext={hasSelectedAnswer}
           isLastQuestion={isLastQuestion}
+          isSaving={isSaving}
           onBack={handleBack}
           onNext={handleNext}
         />

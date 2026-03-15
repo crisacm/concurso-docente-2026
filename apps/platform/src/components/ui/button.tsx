@@ -9,13 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground border-2 border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]",
+        default: "bg-primary text-primary-foreground border border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]",
         destructive:
-          "bg-destructive text-white border-2 border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]",
+          "bg-destructive text-white border border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]",
         outline:
-          "border-2 border-foreground bg-card shadow-[var(--shadow-nb-sm)] hover:bg-secondary hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
+          "border border-foreground bg-card shadow-[var(--shadow-nb-sm)] hover:bg-secondary hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
         secondary:
-          "bg-secondary text-secondary-foreground border-2 border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
+          "bg-secondary text-secondary-foreground border border-foreground shadow-[var(--shadow-nb-sm)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
         ghost:
           "hover:bg-secondary hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",

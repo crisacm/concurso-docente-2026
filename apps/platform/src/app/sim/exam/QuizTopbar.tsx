@@ -32,7 +32,7 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
       <button
         onClick={onCancelClick}
         aria-label="Cancelar examen"
-        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card shadow-[var(--shadow-nb-sm)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
+        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-foreground/30 bg-card shadow-[var(--shadow-nb-sm)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
         <GraduationCap className="h-5 w-5 text-primary" />
       </button>
@@ -40,7 +40,7 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
       {/* Zona central: toggle día/noche */}
       <button
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
-        className="relative flex items-center gap-1 overflow-hidden rounded-full border-2 border-foreground bg-card p-1 shadow-[var(--shadow-nb-sm)]"
+        className="relative flex items-center gap-1 overflow-hidden rounded-full border border-foreground/30 bg-card p-1 shadow-[var(--shadow-nb-sm)]"
         aria-label="Alternar tema"
       >
         {/* Thumb animado */}
@@ -50,7 +50,7 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
         />
         {/* Sol */}
         <span className="relative z-10 flex h-7 w-7 items-center justify-center">
-          <Sun className="h-3.5 w-3.5 text-amber-500" />
+          <Sun className="h-3.5 w-3.5 text-amber-600" />
         </span>
         {/* Luna */}
         <span className="relative z-10 flex h-7 w-7 items-center justify-center">
@@ -59,7 +59,7 @@ export function QuizTopbar({ timeLeft, onCancelClick }: QuizTopbarProps) {
       </button>
 
       {/* Zona derecha: pill con timer y cancelar */}
-      <div className="flex items-center gap-3 rounded-lg border-2 border-foreground bg-card px-3 py-1.5 shadow-[var(--shadow-nb-sm)]">
+      <div className="flex items-center gap-3 rounded-lg border border-foreground/30 bg-card px-3 py-1.5 shadow-[var(--shadow-nb-sm)]">
         {/* Timer */}
         <div className="flex items-center gap-1.5">
           <Clock className="h-3.5 w-3.5 text-muted-foreground" />

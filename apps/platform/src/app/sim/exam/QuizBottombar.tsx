@@ -6,6 +6,7 @@ interface QuizBottombarProps {
   canGoBack: boolean
   canGoNext: boolean
   isLastQuestion: boolean
+  isSaving: boolean
   onBack: () => void
   onNext: () => void
 }
@@ -14,6 +15,7 @@ export function QuizBottombar({
   canGoBack,
   canGoNext,
   isLastQuestion,
+  isSaving,
   onBack,
   onNext,
 }: QuizBottombarProps) {
@@ -22,9 +24,9 @@ export function QuizBottombar({
       {/* Botón Atrás */}
       <button
         onClick={onBack}
-        disabled={!canGoBack}
+        disabled={!canGoBack || isSaving}
         aria-label="Pregunta anterior"
-        className="flex items-center gap-2 rounded-lg border-2 border-foreground bg-card px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
+        className="flex items-center gap-2 rounded-lg border border-foreground/30 bg-card px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
           disabled:cursor-not-allowed disabled:opacity-40
           hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
@@ -35,19 +37,27 @@ export function QuizBottombar({
       {/* Botón Siguiente / Finalizar */}
       <button
         onClick={onNext}
-        disabled={!canGoNext}
+        disabled={!canGoNext || isSaving}
         aria-label={isLastQuestion ? 'Finalizar simulacro' : 'Siguiente pregunta'}
-        className="flex items-center gap-2 rounded-lg border-2 border-foreground bg-primary px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
+        className="flex items-center gap-2 rounded-lg border border-foreground/30 bg-primary px-4 py-2 shadow-[var(--shadow-nb-sm)] transition-all
           disabled:cursor-not-allowed disabled:opacity-40
           hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
       >
-        <span className="text-[13px] font-bold text-primary-foreground">
-          {isLastQuestion ? 'Finalizar' : 'Siguiente'}
-        </span>
-        {isLastQuestion ? (
-          <CheckCircle className="h-4 w-4 text-primary-foreground" />
+        {isSaving ? (
+          <>
+            <div className="h-4 w-4 animate-spin rounded-sm border-2 border-current border-t-transparent text-primary-foreground" />
+            <span className="text-[13px] font-bold text-primary-foreground">Guardando...</span>
+          </>
+        ) : isLastQuestion ? (
+          <>
+            <span className="text-[13px] font-bold text-primary-foreground">Finalizar</span>
+            <CheckCircle className="h-4 w-4 text-primary-foreground" />
+          </>
         ) : (
-          <ChevronRight className="h-4 w-4 text-primary-foreground" />
+          <>
+            <span className="text-[13px] font-bold text-primary-foreground">Siguiente</span>
+            <ChevronRight className="h-4 w-4 text-primary-foreground" />
+          </>
         )}
       </button>
     </div>

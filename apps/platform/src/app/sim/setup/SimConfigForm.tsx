@@ -43,7 +43,7 @@ export function SimConfigForm() {
     const router = useRouter()
     const [selectedProfile, setSelectedProfile] = useState<SimProfile | null>('aula')
     const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null)
-    const [selectedCount, setSelectedCount] = useState<QuestionCount>(30)
+    const [selectedCount, setSelectedCount] = useState<QuestionCount | 10 | null>(null)
     const [showStartDialog, setShowStartDialog] = useState(false)
     const [topics, setTopics] = useState<Topic[]>([])
     const [topicsLoading, setTopicsLoading] = useState(true)
@@ -81,19 +81,19 @@ export function SimConfigForm() {
 
     return (
         <>
-            <Card className="w-full rounded-lg p-3 sm:p-6">
+            <Card className="w-full rounded-lg p-4 sm:p-5">
                 {/* Step 1 — Perfil */}
                 <div className="mb-2">
-                    <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
-                            <span className="text-[12px] font-bold text-primary">1</span>
+                    <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/60 bg-primary/10">
+                            <span className="text-[12px] font-bold">1</span>
                         </div>
-                        <h3 className="text-[16px] text-foreground">
+                        <h3 className="text-[13px] font-bold text-foreground">
                             Selecciona tu Perfil
                         </h3>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-2">
                         {profiles.map(({ id, label, icon: Icon }) => {
                             const isSelected = selectedProfile === id
                             return (
@@ -101,15 +101,15 @@ export function SimConfigForm() {
                                     key={id}
                                     role="button"
                                     tabIndex={0}
-                                        onClick={() => setSelectedProfile(id)}
-                                        onKeyDown={(e) => e.key === 'Enter' && setSelectedProfile(id)}
-                                        className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-4 transition-all duration-200 ${isSelected
-                                            ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
-                                            : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
-                                            }`}
-                                    >
+                                    onClick={() => setSelectedProfile(id)}
+                                    onKeyDown={(e) => e.key === 'Enter' && setSelectedProfile(id)}
+                                    className={`flex cursor-pointer flex-row items-center gap-3 rounded-lg border px-3 py-2.5 transition-all duration-200 ${isSelected
+                                        ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
+                                        : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
+                                        }`}
+                                >
                                     <Icon
-                                        className={`mb-2.5 h-7 w-7 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}
+                                        className={`h-5 w-5 shrink-0 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}
                                     />
                                     <span
                                         className={`text-[13px] font-bold ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}
@@ -127,11 +127,11 @@ export function SimConfigForm() {
 
                 {/* Step 2 — Área de Conocimiento */}
                 <div className="mb-2">
-                    <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
-                            <span className="text-[12px] font-bold text-primary">2</span>
+                    <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/60 bg-primary/10">
+                            <span className="text-[12px] font-bold">2</span>
                         </div>
-                        <h3 className="text-[16px] text-foreground">
+                        <h3 className="text-[13px] font-bold text-foreground">
                             Área de Conocimiento
                         </h3>
                     </div>
@@ -162,11 +162,11 @@ export function SimConfigForm() {
 
                 {/* Step 3 — Cantidad de preguntas */}
                 <div className="mb-2">
-                    <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/30 bg-primary/10">
-                            <span className="text-[12px] font-bold text-primary">3</span>
+                    <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md border border-foreground/60 bg-primary/10">
+                            <span className="text-[12px] font-bold">3</span>
                         </div>
-                        <h3 className="text-[16px] text-foreground">
+                        <h3 className="text-[13px] font-bold text-foreground">
                             Cantidad de Preguntas
                         </h3>
                     </div>
@@ -179,22 +179,45 @@ export function SimConfigForm() {
                                     key={count}
                                     role="button"
                                     tabIndex={0}
-                                        onClick={() => setSelectedCount(count)}
-                                        onKeyDown={(e) => e.key === 'Enter' && setSelectedCount(count)}
-                                        className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-4 transition-all duration-200 ${isSelected
-                                            ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
-                                            : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
-                                            }`}
-                                    >
+                                    onClick={() => setSelectedCount(count)}
+                                    onKeyDown={(e) => e.key === 'Enter' && setSelectedCount(count)}
+                                    className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2.5 transition-all duration-200 ${isSelected
+                                        ? 'border-foreground/50 bg-primary/10 shadow-[var(--shadow-nb-sm)]'
+                                        : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
+                                        }`}
+                                >
                                     <span className={`text-[20px] font-bold ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>
                                         {count}
                                     </span>
                                     <span className={`text-[12px] font-medium ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}>
                                         preguntas
                                     </span>
+                                    <span className="text-[10px] text-muted-foreground">{timerMinutes[count]} min</span>
                                 </div>
                             )
                         })}
+                        {process.env.NODE_ENV === 'development' && (
+                            <button
+                                key="dev-10"
+                                onClick={() => setSelectedCount(10)}
+                                className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2.5 transition-all duration-200 ${
+                                    selectedCount === 10
+                                        ? 'border-amber-500 bg-amber-50 shadow-[var(--shadow-nb-sm)] dark:bg-amber-900/20'
+                                        : 'border-foreground/10 bg-card hover:border-foreground/30 hover:shadow-[var(--shadow-nb-sm)]'
+                                }`}
+                            >
+                                <span className={`text-[20px] font-bold ${selectedCount === 10 ? 'text-amber-600' : 'text-muted-foreground'}`}>
+                                    10
+                                </span>
+                                <span className={`text-[12px] font-medium ${selectedCount === 10 ? 'text-foreground' : 'text-muted-foreground'}`}>
+                                    preguntas
+                                </span>
+                                <span className="text-[10px] text-muted-foreground">5 min</span>
+                                <span className="mt-1 rounded-sm bg-amber-400 px-1.5 py-0.5 text-[9px] font-bold text-amber-900">
+                                    DEV
+                                </span>
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -204,14 +227,16 @@ export function SimConfigForm() {
                         type="submit"
                         disabled={!isConfigurationValid}
                         onClick={() => setShowStartDialog(true)}
-                        className="w-full rounded-lg py-4 text-[14px]"
+                        className="w-full rounded-lg py-2.5 text-[14px]"
                     >
                         Comenzar Simulacro
                         <ArrowRight className="h-4 w-4" />
                     </Button>
-                    <p className="mt-3 text-center text-[11px] text-muted-foreground">
-                        Al comenzar, tendrás {timerMinutes[selectedCount]} min para completar las {selectedCount} preguntas.
-                    </p>
+                    {selectedCount !== null && (
+                        <p className="mt-3 text-center text-[11px] text-muted-foreground">
+                            Al comenzar, tendrás {selectedCount === 10 ? 5 : timerMinutes[selectedCount as QuestionCount]} min para completar las {selectedCount} preguntas.
+                        </p>
+                    )}
                 </div>
             </Card>
 
@@ -239,7 +264,7 @@ export function SimConfigForm() {
                             </div>
                         )}
                         <p className="text-[12px] text-muted-foreground">
-                            Tendrás {timerMinutes[selectedCount]} min · {selectedCount} preguntas · distribución equitativa por componente
+                            Tendrás {selectedCount === 10 ? 5 : timerMinutes[selectedCount as QuestionCount]} min · {selectedCount} preguntas · distribución equitativa por componente
                         </p>
                     </div>
 

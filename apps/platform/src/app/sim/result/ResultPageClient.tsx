@@ -35,9 +35,9 @@ interface CircularProgressProps {
 }
 
 function CircularProgress({ percentage, correct, total }: CircularProgressProps) {
-  const radius = 54
-  const strokeWidth = 8
-  const size = 128
+  const radius = 38
+  const strokeWidth = 6
+  const size = 96
   const cx = size / 2
   const cy = size / 2
   const circumference = 2 * Math.PI * radius
@@ -67,22 +67,22 @@ function CircularProgress({ percentage, correct, total }: CircularProgressProps)
       />
       <text
         x={cx}
-        y={cy - 4}
+        y={cy - 3}
         textAnchor="middle"
         dominantBaseline="middle"
         className="fill-foreground font-bold"
-        fontSize="26"
+        fontSize="20"
         fontWeight="700"
       >
         {correct}
       </text>
       <text
         x={cx}
-        y={cy + 18}
+        y={cy + 13}
         textAnchor="middle"
         dominantBaseline="middle"
         className="fill-muted-foreground"
-        fontSize="13"
+        fontSize="11"
       >
         /{total}
       </text>
@@ -100,7 +100,7 @@ const AREA_ICONS: Record<Componente, React.ElementType> = {
 
 const LEVEL_CLASSES: Record<PerformanceLevel, string> = {
   Alta: 'bg-accent text-accent-foreground border border-foreground/30',
-  Media: 'bg-amber-100 text-amber-800 border border-foreground/30 dark:bg-amber-900/30 dark:text-amber-400',
+  Media: 'bg-amber-100 text-amber-600 border border-foreground/30 dark:bg-amber-900/30 dark:text-amber-400',
   Baja: 'bg-destructive/10 text-destructive border border-foreground/30',
 }
 
@@ -154,7 +154,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
 
       <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
         {/* Hero Card */}
-        <div className="mb-8 flex flex-col gap-6 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-6 py-5 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-4 flex flex-col gap-3 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-4 py-2 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <BarChart className="h-5 w-5 text-primary-foreground/70" />
@@ -162,15 +162,15 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
                 {isAbandoned ? 'Simulacro Abandonado' : 'Resultados del Simulacro'}
               </h1>
             </div>
-            <p className="mt-1 text-[12px] text-primary-foreground/60">
+            <p className="mt-1 text-[12px] text-primary-foreground/80">
               {isAbandoned
                 ? 'Completaste parcialmente el examen. Aquí está tu resumen.'
                 : 'Has completado el examen exitosamente. Aquí tienes un resumen detallado.'}
             </p>
           </div>
 
-          <div className="flex shrink-0 flex-col items-center rounded-lg border border-foreground/30 bg-card px-5 py-4 shadow-[var(--shadow-nb-sm)]">
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          <div className="flex shrink-0 flex-col items-center rounded-lg border border-foreground/30 bg-card px-3 py-2 shadow-[var(--shadow-nb-sm)]">
+            <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Puntaje Global
             </p>
             <CircularProgress percentage={globalPct} correct={score} total={total} />
@@ -198,7 +198,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
         )}
 
         {/* Action buttons */}
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:justify-start">
           {questions.length > 0 && (
             <Button
               onClick={() => setShowReviewModal(true)}

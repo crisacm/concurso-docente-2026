@@ -37,13 +37,13 @@ export function SimPageClient({ email, name, avatarUrl }: SimPageClientProps) {
 
       <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
         {/* Hero card */}
-        <div className="mb-8 flex flex-col gap-4 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-5 py-4 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-4 flex flex-col gap-3 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-6 py-3 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowBackDialog(true)}
                 aria-label="Volver al Dashboard"
-                className="flex h-7 w-7 items-center justify-center rounded-md border-2 border-primary-foreground/40 bg-primary-foreground/20 text-primary-foreground/70 transition-colors hover:bg-primary-foreground/30 hover:text-primary-foreground"
+                className="flex h-7 w-7 items-center justify-center rounded-md border border-primary-foreground/40 bg-primary-foreground/20 text-primary-foreground/70 shadow-[var(--shadow-nb-sm)] transition-colors hover:bg-primary-foreground/30 hover:text-primary-foreground hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -51,16 +51,16 @@ export function SimPageClient({ email, name, avatarUrl }: SimPageClientProps) {
                 Configuración
               </h1>
             </div>
-            <p className="mt-1 text-[12px] text-primary-foreground/60">
+            <p className="mt-1 text-[12px] text-primary-foreground/80">
               Personaliza tu prueba para el Concurso Docente 2026
             </p>
           </div>
 
-          <div className="flex shrink-0 items-center gap-3 rounded-lg border border-foreground/30 bg-card px-4 py-3 shadow-[var(--shadow-nb-sm)]">
-            <Settings2 className="h-4 w-4 shrink-0 text-primary" />
+          <div className="flex shrink-0 items-center gap-4 rounded-lg border border-foreground/30 bg-card px-4 py-3 shadow-[var(--shadow-nb-sm)]">
+            <Settings2 className="h-4 w-4 shrink-0" />
             <Separator orientation="vertical" className="h-6" />
             <p className="text-[11px] text-muted-foreground">
-              <span className="font-bold text-primary">2 pasos</span> para
+              <span className="font-bold">2 pasos</span> para
               configurar tu prueba
             </p>
           </div>
