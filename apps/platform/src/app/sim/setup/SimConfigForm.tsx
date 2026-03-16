@@ -45,6 +45,9 @@ export function SimConfigForm() {
     const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null)
     const [selectedCount, setSelectedCount] = useState<QuestionCount | 10 | null>(null)
     const [showStartDialog, setShowStartDialog] = useState(false)
+    const [checkingCooldown, setCheckingCooldown] = useState(false)
+    const [showCooldownDialog, setShowCooldownDialog] = useState(false)
+    const [cooldownRemaining, setCooldownRemaining] = useState(0)
     const [topics, setTopics] = useState<Topic[]>([])
     const [topicsLoading, setTopicsLoading] = useState(true)
     const [topicsError, setTopicsError] = useState<string | null>(null)
@@ -71,12 +74,41 @@ export function SimConfigForm() {
 
     const selectedTopicLabel = topics.find((t) => t.id === selectedTopicId)?.topic ?? selectedTopicId
 
-    const handleStart = () => {
-        if (isConfigurationValid) {
-            router.push(
-                `/sim/exam?profile=${selectedProfile}&topicId=${selectedTopicId}&totalQuestions=${selectedCount}`,
-            )
+    const handleStart = async () => {
+        if (!isConfigurationValid) return
+        setCheckingCooldown(true)
+
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+
+        if (user) {
+            const { data: lastSession } = await supabase
+                .from('exam_sessions')
+                .select('status, started_at, completed_at')
+                .eq('user_id', user.id)
+                .in('status', ['completed', 'abandoned'])
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .single()
+
+            if (lastSession) {
+                const refTime = new Date(lastSession.completed_at ?? lastSession.started_at)
+                const diffMinutes = (Date.now() - refTime.getTime()) / 60000
+                const COOLDOWN_MINUTES = 45
+
+                if (diffMinutes < COOLDOWN_MINUTES) {
+                    const remaining = Math.ceil(COOLDOWN_MINUTES - diffMinutes)
+                    setCooldownRemaining(remaining)
+                    setCheckingCooldown(false)
+                    setShowStartDialog(false)
+                    setShowCooldownDialog(true)
+                    return
+                }
+            }
         }
+
+        setCheckingCooldown(false)
+        router.push(`/sim/exam?profile=${selectedProfile}&topicId=${selectedTopicId}&totalQuestions=${selectedCount}`)
     }
 
     return (
@@ -272,8 +304,43 @@ export function SimConfigForm() {
                         <Button variant="outline" onClick={() => setShowStartDialog(false)}>
                             Cancelar
                         </Button>
-                        <Button onClick={handleStart}>
-                            Iniciar Simulacro
+                        <Button onClick={handleStart} disabled={checkingCooldown}>
+                            {checkingCooldown ? 'Verificando...' : 'Iniciar Simulacro'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* Diálogo: cooldown activo */}
+            <Dialog open={showCooldownDialog} onOpenChange={setShowCooldownDialog}>
+                <DialogContent showCloseButton={false} className="rounded-lg">
+                    <DialogHeader>
+                        <DialogTitle>Debes esperar antes de iniciar</DialogTitle>
+                        <DialogDescription>
+                            Entre simulacros debes esperar al menos 45 minutos.
+                            Faltan <strong>{cooldownRemaining} minuto{cooldownRemaining !== 1 ? 's' : ''}</strong> para poder iniciar uno nuevo.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="flex-col gap-2 sm:flex-col">
+                        {process.env.NODE_ENV === 'development' && (
+                            <div className="w-full">
+                                <Button
+                                    variant="outline"
+                                    className="w-full border-amber-500 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950"
+                                    onClick={() => {
+                                        setShowCooldownDialog(false)
+                                        router.push(`/sim/exam?profile=${selectedProfile}&topicId=${selectedTopicId}&totalQuestions=${selectedCount}`)
+                                    }}
+                                >
+                                    Omitir e iniciar
+                                </Button>
+                                <p className="mt-1 text-center text-[10px] text-amber-600 dark:text-amber-500">
+                                    Solo visible en entorno de desarrollo
+                                </p>
+                            </div>
+                        )}
+                        <Button className="w-full" onClick={() => setShowCooldownDialog(false)}>
+                            Entendido
                         </Button>
                     </DialogFooter>
                 </DialogContent>
