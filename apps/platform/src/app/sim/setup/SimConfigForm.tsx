@@ -21,6 +21,7 @@ import {
     SelectValue,
 } from '@/components/ui'
 import { createClient } from '@/utils/supabase/client'
+import { checkSimCooldown } from './actions'
 import type { SimProfile, Topic } from '@/types'
 
 const profiles = [
@@ -74,40 +75,26 @@ export function SimConfigForm() {
 
     const selectedTopicLabel = topics.find((t) => t.id === selectedTopicId)?.topic ?? selectedTopicId
 
-    const handleStart = async () => {
+    const handleBeginClick = async () => {
         if (!isConfigurationValid) return
         setCheckingCooldown(true)
-
-        const supabase = createClient()
-        const { data: { user } } = await supabase.auth.getUser()
-
-        if (user) {
-            const { data: lastSession } = await supabase
-                .from('exam_sessions')
-                .select('status, started_at, completed_at')
-                .eq('user_id', user.id)
-                .in('status', ['completed', 'abandoned'])
-                .order('created_at', { ascending: false })
-                .limit(1)
-                .single()
-
-            if (lastSession) {
-                const refTime = new Date(lastSession.completed_at ?? lastSession.started_at)
-                const diffMinutes = (Date.now() - refTime.getTime()) / 60000
-                const COOLDOWN_MINUTES = 45
-
-                if (diffMinutes < COOLDOWN_MINUTES) {
-                    const remaining = Math.ceil(COOLDOWN_MINUTES - diffMinutes)
-                    setCooldownRemaining(remaining)
-                    setCheckingCooldown(false)
-                    setShowStartDialog(false)
-                    setShowCooldownDialog(true)
-                    return
-                }
+        try {
+            const result = await checkSimCooldown()
+            if (!result.allowed) {
+                setCooldownRemaining(result.remaining)
+                setShowCooldownDialog(true)
+                return
             }
+            setShowStartDialog(true)
+        } catch (err) {
+            if (process.env.NODE_ENV === 'development') console.error('[cooldown] error:', err)
+            setShowStartDialog(true)
+        } finally {
+            setCheckingCooldown(false)
         }
+    }
 
-        setCheckingCooldown(false)
+    const handleStart = () => {
         router.push(`/sim/exam?profile=${selectedProfile}&topicId=${selectedTopicId}&totalQuestions=${selectedCount}`)
     }
 
@@ -257,12 +244,12 @@ export function SimConfigForm() {
                 <div>
                     <Button
                         type="submit"
-                        disabled={!isConfigurationValid}
-                        onClick={() => setShowStartDialog(true)}
+                        disabled={!isConfigurationValid || checkingCooldown}
+                        onClick={handleBeginClick}
                         className="w-full rounded-lg py-2.5 text-[14px]"
                     >
-                        Comenzar Simulacro
-                        <ArrowRight className="h-4 w-4" />
+                        {checkingCooldown ? 'Verificando...' : 'Comenzar Simulacro'}
+                        {!checkingCooldown && <ArrowRight className="h-4 w-4" />}
                     </Button>
                     {selectedCount !== null && (
                         <p className="mt-3 text-center text-[11px] text-muted-foreground">
@@ -304,8 +291,8 @@ export function SimConfigForm() {
                         <Button variant="outline" onClick={() => setShowStartDialog(false)}>
                             Cancelar
                         </Button>
-                        <Button onClick={handleStart} disabled={checkingCooldown}>
-                            {checkingCooldown ? 'Verificando...' : 'Iniciar Simulacro'}
+                        <Button onClick={handleStart}>
+                            Iniciar Simulacro
                         </Button>
                     </DialogFooter>
                 </DialogContent>

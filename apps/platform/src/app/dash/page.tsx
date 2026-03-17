@@ -10,6 +10,7 @@ import { HistorialModal } from './HistorialModal'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui'
 import { Separator } from '@/components/ui/separator'
 import type { AxisTheme, Componente } from '@/types'
+import { IniciarButton } from './IniciarButton'
 
 
 function formatDate(iso: string): string {
@@ -126,12 +127,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <Separator orientation="vertical" className="h-8" />
-            <Link href="/sim/setup">
-              <span className="flex items-center gap-1.5 rounded-md bg-accent border border-foreground/30 text-accent-foreground px-4 py-2 text-[12px] font-bold shadow-[var(--shadow-nb-sm)] transition-all cursor-pointer hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none">
-                Iniciar
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </Link>
+            <IniciarButton />
           </div>
         </div>
 

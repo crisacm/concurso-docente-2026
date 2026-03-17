@@ -246,7 +246,7 @@ export function QuizPageClient({
             'Content-Type': 'application/json',
             Prefer: 'return=minimal',
           },
-          body: JSON.stringify({ status: 'abandoned' }),
+          body: JSON.stringify({ status: 'abandoned', completed_at: new Date().toISOString() }),
           keepalive: true,
         })
       }
@@ -259,7 +259,7 @@ export function QuizPageClient({
       if (sessionIdRef.current && sessionStatusRef.current === 'in_progress') {
         supabase
           .from('exam_sessions')
-          .update({ status: 'abandoned' })
+          .update({ status: 'abandoned', completed_at: new Date().toISOString() })
           .eq('id', sessionIdRef.current)
           .then(() => {})
       }
@@ -321,7 +321,7 @@ export function QuizPageClient({
     sessionStatusRef.current = 'done'
     const { error } = await supabase
       .from('exam_sessions')
-      .update({ status: 'abandoned' })
+      .update({ status: 'abandoned', completed_at: new Date().toISOString() })
       .eq('id', sessionId)
     if (error) {
       if (process.env.NODE_ENV === 'development') console.error('[handleCancel]', error)
