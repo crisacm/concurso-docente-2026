@@ -4,17 +4,39 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { Button, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui'
-import { checkSimCooldown } from '@/app/sim/setup/actions'
+import { checkSimCooldown, finalizeExpiredSession } from '@/app/sim/setup/actions'
 
-export function IniciarButton() {
+interface IniciarButtonProps {
+    resumeSession?: {
+        id: string
+        profile: string
+        topic_id: string
+        total_questions: number
+        started_at: string
+        remaining: number
+    } | null
+    expiredSessionId?: string
+}
+
+export function IniciarButton({ resumeSession, expiredSessionId }: IniciarButtonProps) {
     const router = useRouter()
     const [checking, setChecking] = useState(false)
     const [showCooldownDialog, setShowCooldownDialog] = useState(false)
     const [cooldownRemaining, setCooldownRemaining] = useState(0)
 
-    const handleClick = async () => {
+    const handleResume = () => {
+        if (!resumeSession) return
+        router.push(
+            `/sim/exam?profile=${resumeSession.profile}&topicId=${resumeSession.topic_id}&totalQuestions=${resumeSession.total_questions}`,
+        )
+    }
+
+    const handleStart = async () => {
         setChecking(true)
         try {
+            if (expiredSessionId) {
+                await finalizeExpiredSession(expiredSessionId)
+            }
             const result = await checkSimCooldown()
             if (!result.allowed) {
                 setCooldownRemaining(result.remaining)
@@ -30,11 +52,24 @@ export function IniciarButton() {
         }
     }
 
+    if (resumeSession) {
+        return (
+            <span
+                role="button"
+                onClick={handleResume}
+                className="flex items-center gap-1.5 rounded-md bg-amber-500 border border-foreground/30 text-white px-4 py-2 text-[12px] font-bold shadow-[var(--shadow-nb-sm)] transition-all cursor-pointer hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
+            >
+                Continuar
+                <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+        )
+    }
+
     return (
         <>
             <span
                 role="button"
-                onClick={handleClick}
+                onClick={handleStart}
                 className="flex items-center gap-1.5 rounded-md bg-accent border border-foreground/30 text-accent-foreground px-4 py-2 text-[12px] font-bold shadow-[var(--shadow-nb-sm)] transition-all cursor-pointer hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
             >
                 {checking ? 'Verificando...' : 'Iniciar'}

@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { TIMER_SECONDS } from '@/lib/exam-config'
 
 const COOLDOWN_MINUTES = 45
 
@@ -33,4 +34,25 @@ export async function checkSimCooldown(): Promise<{ allowed: boolean; remaining:
     }
 
     return { allowed: true, remaining: 0 }
+}
+
+export async function finalizeExpiredSession(sessionId: string): Promise<void> {
+    const supabase = await createClient()
+
+    const { data: session } = await supabase
+        .from('exam_sessions')
+        .select('started_at, total_questions')
+        .eq('id', sessionId)
+        .eq('status', 'in_progress')
+        .single()
+
+    if (!session) return
+
+    const timerSeconds = TIMER_SECONDS[session.total_questions] ?? 3600
+    const completedAt = new Date(new Date(session.started_at).getTime() + timerSeconds * 1000).toISOString()
+
+    await supabase
+        .from('exam_sessions')
+        .update({ status: 'completed', completed_at: completedAt })
+        .eq('id', sessionId)
 }

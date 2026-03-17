@@ -2,15 +2,18 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Topbar } from '@/components/Topbar'
+import { Footer } from '@/components/Footer'
 import { BarChart, Trophy, FileCheck, Timer, ArrowRight, Sparkles } from 'lucide-react'
 import { Suspense } from 'react'
 import { DashboardChart } from './DashboardChart'
 import { computeDashboardMetrics } from './metrics'
 import { HistorialModal } from './HistorialModal'
+import { NormativasModal } from './NormativasModal'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui'
 import { Separator } from '@/components/ui/separator'
 import type { AxisTheme, Componente } from '@/types'
 import { IniciarButton } from './IniciarButton'
+import { TIMER_SECONDS } from '@/lib/exam-config'
 
 
 function formatDate(iso: string): string {
@@ -24,6 +27,8 @@ function formatDate(iso: string): string {
 }
 
 export default async function DashboardPage() {
+  // eslint-disable-next-line react-hooks/purity
+  const now = Date.now()
   const supabase = await createClient()
 
   const {
@@ -48,6 +53,34 @@ export default async function DashboardPage() {
 
   const completedSessions = sessions ?? []
   const sessionIds = completedSessions.map((s) => s.id)
+
+  // ─── Check in-progress session ─────────────────────────────────────────────
+  const { data: inProgressSession } = await supabase
+    .from('exam_sessions')
+    .select('id, profile, topic_id, total_questions, started_at')
+    .eq('user_id', user.id)
+    .eq('status', 'in_progress')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  let resumeSession: {
+    id: string
+    profile: string
+    topic_id: string
+    total_questions: number
+    started_at: string
+    remaining: number
+  } | null = null
+
+  if (inProgressSession) {
+    const elapsed = (now - new Date(inProgressSession.started_at).getTime()) / 1000
+    const timerSeconds = TIMER_SECONDS[inProgressSession.total_questions] ?? 3600
+    const remaining = Math.floor(timerSeconds - elapsed)
+    if (remaining > 0) {
+      resumeSession = { ...inProgressSession, remaining }
+    }
+  }
 
   // ─── Fetch answers for completed sessions ─────────────────────────────────
   const answersResult =
@@ -99,10 +132,10 @@ export default async function DashboardPage() {
   }))
 
   return (
-    <div className="relative min-h-screen pb-20">
+    <div className="relative flex flex-col min-h-screen">
       <Topbar email={email} name={name} avatarUrl={avatarUrl} />
 
-      <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
+      <main className="relative z-10 mx-auto w-full max-w-[800px] flex-1 px-4 pt-24 pb-6 sm:px-6">
         {/* Hero card */}
         <div className="mb-4 flex flex-col gap-3 rounded-xl overflow-hidden bg-primary border border-foreground/30 shadow-[var(--shadow-nb)] px-6 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -119,15 +152,13 @@ export default async function DashboardPage() {
               <p className="text-[11px] text-muted-foreground">
                 Información basada en la normativa vigente.
               </p>
-              <Link
-                href="/regulations"
-                className="text-[11px] text-foreground underline underline-offset-2 hover:text-primary"
-              >
-                Más información
-              </Link>
+              <NormativasModal />
             </div>
             <Separator orientation="vertical" className="h-8" />
-            <IniciarButton />
+            <IniciarButton
+              resumeSession={resumeSession}
+              expiredSessionId={!resumeSession && inProgressSession ? inProgressSession.id : undefined}
+            />
           </div>
         </div>
 
@@ -262,6 +293,7 @@ export default async function DashboardPage() {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   )
 }

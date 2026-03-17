@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { BarChart, BookOpen, Brain, Eye, Home, Presentation } from 'lucide-react'
 import { Topbar } from '@/components/Topbar'
+import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui'
 import { ReviewModal } from './ReviewModal'
 import type { ResultData, AreaResult } from './page'
@@ -144,7 +145,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
   const isAbandoned = session.status === 'abandoned'
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Topbar
         email={email}
         name={name}
@@ -152,7 +153,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
         onHomeClick={() => router.push('/dash')}
       />
 
-      <main className="relative z-10 mx-auto max-w-[800px] px-4 pt-24 sm:px-6">
+      <main className="relative z-10 mx-auto w-full max-w-[800px] flex-1 px-4 pt-24 pb-6 sm:px-6">
         {/* Hero Card */}
         <div className="mb-4 flex flex-col gap-3 overflow-hidden rounded-xl border border-foreground/30 bg-primary px-4 py-2 shadow-[var(--shadow-nb)] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
@@ -220,6 +221,7 @@ export function ResultPageClient({ email, name, avatarUrl, resultData }: ResultP
         onClose={() => setShowReviewModal(false)}
         questions={questions}
       />
-    </>
+      <Footer />
+    </div>
   )
 }

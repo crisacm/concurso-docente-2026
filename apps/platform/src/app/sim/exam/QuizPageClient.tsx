@@ -17,6 +17,7 @@ import {
 import { toast } from 'sonner'
 import { createClient } from '@/utils/supabase/client'
 import type { QuestionBank, SimProfile, Componente, AxisTheme } from '@/types'
+import { TIMER_SECONDS } from '@/lib/exam-config'
 
 interface QuizPageClientProps {
   email: string
@@ -49,7 +50,6 @@ export function computeDistribution(total: number): [number, number, number] {
 }
 
 const AXIS_THEMES: AxisTheme[] = ['Contexto', 'Planeacion', 'Praxis', 'Ambiente']
-const TIMER_SECONDS: Record<number, number> = { 10: 300, 30: 2400, 50: 3600, 100: 7200 }
 
 export function QuizPageClient({
   userId,
@@ -134,6 +134,88 @@ export function QuizPageClient({
       initCalledRef.current = true
 
       try {
+        // 0. Check for existing in_progress session (resume)
+        const { data: existing } = await supabase
+          .from('exam_sessions')
+          .select('id, started_at, total_questions, topic_id, profile')
+          .eq('user_id', userId)
+          .eq('status', 'in_progress')
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        if (existing) {
+          const elapsed = (Date.now() - new Date(existing.started_at).getTime()) / 1000
+          const timerSeconds = TIMER_SECONDS[existing.total_questions] ?? 3600
+          const remaining = Math.floor(timerSeconds - elapsed)
+
+          if (remaining <= 0) {
+            // Expired: complete and redirect to results
+            const completedAt = new Date(
+              new Date(existing.started_at).getTime() + timerSeconds * 1000,
+            ).toISOString()
+            await supabase
+              .from('exam_sessions')
+              .update({ status: 'completed', completed_at: completedAt })
+              .eq('id', existing.id)
+            router.replace(`/sim/result?session_id=${existing.id}`)
+            return
+          }
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`[QuizInit] resuming session ${existing.id}, remaining: ${remaining}s`)
+          }
+
+          // Fetch previously saved answers
+          const { data: prevAnswers } = await supabase
+            .from('exam_answers')
+            .select('question_id, selected_answer')
+            .eq('session_id', existing.id)
+
+          const answeredIds = new Set((prevAnswers ?? []).map((a) => a.question_id))
+
+          // Fetch questions that were already answered
+          const { data: answeredQs } = answeredIds.size > 0
+            ? await supabase.from('question_bank').select('*').in('id', [...answeredIds])
+            : { data: [] }
+
+          // Fetch additional questions from pool to fill up to total_questions
+          const needed = existing.total_questions - (answeredQs?.length ?? 0)
+          const { data: poolQs } = needed > 0
+            ? await supabase
+                .from('question_bank')
+                .select('*')
+                .eq('topic_id', existing.topic_id)
+                .not('id', 'in', `(${[...answeredIds].join(',')})`)
+                .limit(needed * 3)
+            : { data: [] }
+
+          const extraQs = shuffle((poolQs ?? []) as QuestionBank[]).slice(0, needed)
+          const allQuestions = [...(answeredQs ?? []) as QuestionBank[], ...extraQs]
+
+          // Reconstruct selectedAnswers (letter → optionIdx)
+          const restoredAnswers: Record<number, number> = {}
+          for (const ans of prevAnswers ?? []) {
+            const idx = allQuestions.findIndex((q) => q.id === ans.question_id)
+            if (idx !== -1) {
+              const optionIdx = LETTERS.indexOf(ans.selected_answer)
+              if (optionIdx !== -1) restoredAnswers[idx] = optionIdx
+            }
+          }
+
+          // Start from first unanswered question
+          const firstUnanswered = allQuestions.findIndex((_, i) => restoredAnswers[i] === undefined)
+
+          setQuestions(allQuestions)
+          setSessionId(existing.id)
+          sessionIdRef.current = existing.id
+          setSelectedAnswers(restoredAnswers)
+          setCurrentQuestion(firstUnanswered >= 0 ? firstUnanswered : 0)
+          setTimeLeft(remaining)
+          setLoading(false)
+          return
+        }
+
         // 1. Fetch ALL available questions per component (no limit yet)
         const allPerComponent = await Promise.all(
           (['Pedagógico', 'Fundamentos', 'Psicotécnico'] as Componente[]).map(async (comp) => {
@@ -233,39 +315,6 @@ export function QuizPageClient({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, sessionId])
 
-  // ─── Abandon on unmount / beforeunload ────────────────────────────────────────
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (sessionIdRef.current && sessionStatusRef.current === 'in_progress') {
-        const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/exam_sessions?id=eq.${sessionIdRef.current}`
-        fetch(url, {
-          method: 'PATCH',
-          headers: {
-            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
-            'Content-Type': 'application/json',
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify({ status: 'abandoned', completed_at: new Date().toISOString() }),
-          keepalive: true,
-        })
-      }
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-      // Mark as abandoned on in-app navigation away
-      if (sessionIdRef.current && sessionStatusRef.current === 'in_progress') {
-        supabase
-          .from('exam_sessions')
-          .update({ status: 'abandoned', completed_at: new Date().toISOString() })
-          .eq('id', sessionIdRef.current)
-          .then(() => {})
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   // ─── Handlers ─────────────────────────────────────────────────────────────────
 
