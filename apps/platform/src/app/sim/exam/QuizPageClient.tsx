@@ -44,7 +44,7 @@ export function computeDistribution(total: number): [number, number, number] {
   const remainder = total - base * 3
   const counts: [number, number, number] = [base, base, base]
   const positions = [0, 1, 2].sort(() => Math.random() - 0.5)
-  for (let i = 0; i < remainder; i++) counts[positions[i]!]++
+  for (let i = 0; i < remainder; i++) counts[positions[i] as 0 | 1 | 2]++
   return counts
 }
 
